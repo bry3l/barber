@@ -227,6 +227,9 @@ input:focus-visible {
 .nav__list a:hover {
   color: var(--color-gold);
 }
+.nav__list a.is-active {
+  color: var(--color-gold);
+}
 .nav__list a::after {
   content: '';
   position: absolute;
@@ -238,6 +241,9 @@ input:focus-visible {
   transition: var(--transition);
 }
 .nav__list a:hover::after {
+  width: 100%;
+}
+.nav__list a.is-active::after {
   width: 100%;
 }
 
@@ -350,7 +356,7 @@ input:focus-visible {
 
 .hero__title {
   font-family: var(--font-title);
-  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  font-size: clamp(1.5rem, 4vw + 1rem, 3rem);
   font-weight: 800;
   line-height: 1.22;
   margin-bottom: 1.2rem;
@@ -450,25 +456,53 @@ input:focus-visible {
   background-color: var(--color-bg-alt);
 }
 
-.services__grid {
+.galeria {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--color-charcoal);
   border: 1px solid rgba(201, 162, 75, 0.15);
   border-radius: 16px;
   padding: 2.5rem 1.8rem;
   text-align: center;
-  transition: var(--transition);
+  gap: 1rem;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.16);
+  transition: transform 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    circle at var(--pointer-x, 50%) var(--pointer-y, 0%),
+    rgba(224, 192, 122, 0.16),
+    transparent 34%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.015);
   border-color: var(--color-gold);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(201, 162, 75, 0.12);
+}
+.card:hover::before {
+  opacity: 1;
 }
 
 .card--featured {
@@ -518,6 +552,12 @@ input:focus-visible {
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-gold);
+}
+
+@media (min-width: 700px) {
+  .galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* =========================================================
@@ -1010,6 +1050,58 @@ input:focus-visible {
   flex: 1;
 }
 
+.booking-confirmation {
+  padding: 1rem 0 0.2rem;
+  text-align: center;
+  animation: fadeSlideUp 0.45s ease;
+}
+
+.booking-confirmation__icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 1rem;
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+  color: var(--color-gold);
+  font-size: 1.8rem;
+  box-shadow: 0 0 0 8px rgba(201, 162, 75, 0.08);
+}
+
+.booking-confirmation h4 {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  color: var(--color-gold-light);
+}
+
+.booking-confirmation p {
+  margin-bottom: 1.2rem;
+  color: var(--color-gray);
+  font-size: 0.88rem;
+}
+
+.booking-confirmation__details {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1.4rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(201, 162, 75, 0.2);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-white);
+  font-size: 0.82rem;
+}
+
+.booking-confirmation__details strong {
+  color: var(--color-gold-light);
+}
+
+.booking-confirmation .btn {
+  width: 100%;
+}
+
 /* =========================================================
    ESTADÍSTICAS (contadores animados)
    ========================================================= */
@@ -1281,5 +1373,69 @@ input:focus-visible {
   .whatsapp-float svg {
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #090909;
+    --color-bg-alt: #111111;
+    --color-charcoal: #1a1a1a;
+    --color-white: #eeeeee;
+    --color-gray: #a2a2a2;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-white);
+  }
+
+  .services,
+  .stats,
+  .location {
+    background-color: var(--color-bg-alt);
+  }
+
+  .card,
+  .testimonial,
+  .modal__box,
+  .faq__item {
+    background-color: var(--color-charcoal);
+    color: var(--color-white);
+  }
+
+  .card--featured {
+    background: linear-gradient(160deg, #202020, #151515);
+  }
+
+  .section-title,
+  .card__title,
+  .faq__question {
+    color: var(--color-white);
+  }
+
+  .card__desc,
+  .testimonial__text,
+  .section-subtitle,
+  .about__text p,
+  .location p,
+  .footer__tagline,
+  .footer__links a {
+    color: var(--color-gray);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

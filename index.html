@@ -32,7 +32,7 @@
 
       <!-- Botón hamburguesa para móviles -->
       <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú">
+      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -123,7 +123,7 @@
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-subtitle">Calidad premium a precios justos</p>
 
-      <div class="services__grid">
+      <div class="galeria services__grid">
 
         <article class="card">
           <div class="card__icon">
@@ -433,11 +433,11 @@
           <div class="form-row">
             <label class="form-field">
               Fecha
-              <input type="date" name="fecha" required>
+              <input type="date" name="fecha" id="bookingDate" required>
             </label>
             <label class="form-field">
               Hora
-              <input type="time" name="hora" required>
+              <input type="time" name="hora" id="bookingTime" min="09:00" max="19:00" step="1800" required>
             </label>
           </div>
         </div>
@@ -447,6 +447,14 @@
         <button type="button" class="btn btn--outline" id="modalPrev" disabled>Atrás</button>
         <button type="button" class="btn btn--gold" id="modalNext">Siguiente</button>
         <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar por WhatsApp</button>
+      </div>
+
+      <div class="booking-confirmation" id="bookingConfirmation" role="status" aria-live="polite" hidden>
+        <span class="booking-confirmation__icon" aria-hidden="true">✓</span>
+        <h4>Solicitud registrada</h4>
+        <p>La cita quedó guardada en este dispositivo. Enviaremos los datos por WhatsApp para confirmar el horario.</p>
+        <div class="booking-confirmation__details" id="bookingConfirmationDetails"></div>
+        <button type="button" class="btn btn--gold" id="newBooking">Hacer otra reserva</button>
       </div>
     </div>
   </div>
@@ -486,6 +494,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
   </a>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
