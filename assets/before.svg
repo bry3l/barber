@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#2a2a2a"/>
+  <rect width="900" height="600" fill="#0d0d0d" opacity="0.4"/>
+  <!-- Silueta con cabello y barba desordenados ("antes") -->
+  <path d="M330 500 C300 420 300 340 340 280 C300 260 285 210 310 170
+           C340 120 400 100 450 110 C510 95 570 120 590 180
+           C610 230 590 270 555 285 C590 340 590 420 560 500 Z"
+        fill="#161616"/>
+  <path d="M330 500 C300 420 300 340 340 280" fill="none" stroke="#555" stroke-width="6"/>
+  <g stroke="#444" stroke-width="4" stroke-linecap="round" opacity="0.8">
+    <path d="M320 200 C300 180 290 150 310 120"/>
+    <path d="M340 190 C325 165 320 140 335 110"/>
+    <path d="M600 200 C625 175 630 145 610 115"/>
+    <path d="M580 190 C598 165 600 135 585 105"/>
+  </g>
+  <text x="450" y="560" text-anchor="middle" font-family="Poppins, sans-serif" font-size="22"
+        letter-spacing="3" fill="#888">SIN ESTILO DEFINIDO</text>
+</svg>

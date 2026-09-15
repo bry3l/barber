@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#262626"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <pattern id="lines" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="24" stroke="#c9a24b" stroke-width="1" opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="500" height="500" fill="url(#bg)"/>
+  <rect width="500" height="500" fill="url(#lines)"/>
+  <!-- Cabeza estilizada con degradado de corte (fade) -->
+  <path d="M180 420 C150 380 145 320 165 270 C180 235 210 210 250 205
+           C290 210 320 235 335 270 C355 320 350 380 320 420 Z"
+        fill="#1e1e1e" stroke="#c9a24b" stroke-width="4"/>
+  <path d="M175 300 C185 260 215 230 250 228 C285 230 315 260 325 300"
+        fill="none" stroke="#c9a24b" stroke-width="6" opacity="0.9"/>
+  <path d="M185 330 C195 298 218 275 250 273 C282 275 305 298 315 330"
+        fill="none" stroke="#e0c07a" stroke-width="4" opacity="0.7"/>
+  <path d="M195 360 C203 335 222 318 250 316 C278 318 297 335 305 360"
+        fill="none" stroke="#e0c07a" stroke-width="3" opacity="0.5"/>
+</svg>
