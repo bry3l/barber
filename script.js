@@ -35,9 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const baRange = document.getElementById('baRange');
   const baAfterWrap = document.getElementById('baAfterWrap');
   const baHandle = document.getElementById('baHandle');
+  let updateBaSlider = () => {};
 
   if (baSlider && baRange) {
-    const updateBaSlider = (value) => {
+    updateBaSlider = (value = baRange.value) => {
       baAfterWrap.style.width = `${value}%`;
       baHandle.style.left = `${value}%`;
       const afterImg = baAfterWrap.querySelector('img');
@@ -48,10 +49,92 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => updateBaSlider(baRange.value));
   }
 
-  /* ---------- 4. Modal de reserva en 3 pasos ---------- */
-  const modal = document.getElementById('bookingModal');
+  /* ---------- 4. Acordeón de preguntas frecuentes ---------- */
+  document.querySelectorAll('.faq__item').forEach((item) => {
+    const question = item.querySelector('.faq__question');
+    const answer = item.querySelector('.faq__answer');
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.faq__item.is-open').forEach((openItem) => {
+        openItem.classList.remove('is-open');
+        openItem.querySelector('.faq__answer').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        answer.style.maxHeight = `${answer.scrollHeight}px`;
+      }
+    });
+  });
+
+  /* ---------- 5. Contadores animados de estadísticas ---------- */
+  const statNumbers = document.querySelectorAll('.stat__number');
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.countTo);
+    const decimals = Number(el.dataset.decimals || 0);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const value = target * progress;
+      el.textContent = value.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNumbers.forEach((el) => statsObserver.observe(el));
+
+  /* ---------- 6. Sistema genérico de modales ---------- */
+  const modals = document.querySelectorAll('.modal');
   const openTriggers = document.querySelectorAll('[data-open-modal]');
-  const closeTriggers = modal ? modal.querySelectorAll('[data-close-modal]') : [];
+
+  const openModalById = (id) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.classList.add('is-open');
+    target.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (id === 'transformModal') {
+      requestAnimationFrame(() => updateBaSlider());
+    }
+  };
+
+  const closeModal = (modalEl) => {
+    modalEl.classList.remove('is-open');
+    modalEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  const closeAllModals = () => modals.forEach(closeModal);
+
+  openTriggers.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.openModal === 'bookingModal') {
+        currentStep = 1;
+        renderStep();
+      }
+      openModalById(btn.dataset.openModal);
+    });
+  });
+
+  modals.forEach((modalEl) => {
+    modalEl.querySelectorAll('[data-close-modal]').forEach((el) => {
+      el.addEventListener('click', () => closeModal(modalEl));
+    });
+  });
+
+  /* ---------- 7. Pasos del modal de reserva ---------- */
+  const modal = document.getElementById('bookingModal');
   const steps = modal ? modal.querySelectorAll('.modal__step') : [];
   const panels = modal ? modal.querySelectorAll('.modal__panel') : [];
   const prevBtn = document.getElementById('modalPrev');
@@ -68,25 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.hidden = currentStep === totalSteps;
     submitBtn.hidden = currentStep !== totalSteps;
   };
-
-  const openModal = () => {
-    if (!modal) return;
-    currentStep = 1;
-    renderStep();
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  openTriggers.forEach((btn) => btn.addEventListener('click', openModal));
-  closeTriggers.forEach((el) => el.addEventListener('click', closeModal));
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
@@ -116,11 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const mensaje = `Hola, quiero reservar una cita en BLASH.%0AServicio: ${servicio}%0ABarbero: ${barbero}%0AFecha: ${fecha}%0AHora: ${hora}`;
       window.open(`https://wa.me/593999999999?text=${mensaje}`, '_blank', 'noopener');
-      closeModal();
+      closeModal(modal);
     });
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') closeAllModals();
   });
 });
