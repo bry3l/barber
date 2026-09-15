@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLASH | Barbería en Calderón, Quito</title>
+  <meta name="description" content="BLASH - Barbería premium en la parroquia Calderón, Quito. Cortes clásicos, arreglo de barba, fade y combos.">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BLASH | Barbería en Calderón, Quito">
+  <meta property="og:description" content="Barbería premium en la parroquia Calderón, Quito. Cortes clásicos, arreglo de barba, fade y combos.">
+  <meta property="og:image" content="assets/hero-main.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAVEGACIÓN ===================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">
+        <span class="logo__icon" aria-hidden="true">
+          <img src="assets/logo.svg" alt="">
+        </span>
+        BLASH
+      </a>
+
+      <!-- Botón hamburguesa para móviles -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+        <button type="button" class="btn btn--primary nav__cta" data-open-modal="bookingModal">Reservar Cita</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== HERO / PRINCIPAL ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero__overlay"></div>
+    <div class="container hero__grid">
+
+      <div class="hero__content">
+        <div class="hero__social-proof reveal-item" style="--delay:.1s">
+          <span class="hero__rating"><strong>4.9</strong> <span class="hero__stars">★★★★★</span></span>
+          <span class="hero__divider"></span>
+          <span>+500 clientes felices</span>
+          <span class="hero__divider"></span>
+          <span>Barberos certificados</span>
+        </div>
+
+        <h1 class="hero__title reveal-item" style="--delay:.2s">El estilo que buscas, <span>en el corazón de Calderón</span></h1>
+        <p class="hero__subtitle reveal-item" style="--delay:.3s">
+          Cortes clásicos, fades modernos y arreglo de barba profesional en un ambiente pensado
+          para hombres que cuidan su imagen. Bienvenido a tu nueva barbería de confianza.
+        </p>
+
+        <div class="hero__actions reveal-item" style="--delay:.4s">
+          <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
+          <button type="button" class="btn btn--outline" data-open-modal="transformModal">
+            <span class="btn__play">▶</span> Ver Transformaciones
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__visual reveal-item" style="--delay:.5s">
+        <div class="hero__image-main">
+          <img src="assets/hero-main.svg" alt="Ilustración de barbería BLASH" loading="eager">
+        </div>
+        <div class="hero__floating-card">
+          <img src="assets/cut-of-month.svg" alt="Corte del mes BLASH">
+          <div>
+            <span class="hero__floating-tag">Corte del mes</span>
+            <strong>Fade Texturizado</strong>
+          </div>
+        </div>
+        <div class="hero__blob" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ESTADÍSTICAS ===================== -->
+  <section class="stats">
+    <div class="container stats__grid">
+      <div class="stat reveal-item" style="--delay:.05s">
+        <span class="stat__number" data-count-to="500" data-suffix="+">0</span>
+        <span class="stat__label">Clientes felices</span>
+      </div>
+      <div class="stat reveal-item" style="--delay:.1s">
+        <span class="stat__number" data-count-to="4.9" data-decimals="1">0</span>
+        <span class="stat__label">Calificación Google</span>
+      </div>
+      <div class="stat reveal-item" style="--delay:.15s">
+        <span class="stat__number" data-count-to="6" data-suffix="+">0</span>
+        <span class="stat__label">Años de experiencia</span>
+      </div>
+      <div class="stat reveal-item" style="--delay:.2s">
+        <span class="stat__number" data-count-to="3">0</span>
+        <span class="stat__label">Barberos certificados</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">Calidad premium a precios justos</p>
+
+      <div class="galeria services__grid">
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
+          </div>
+          <h3 class="card__title">Corte Clásico</h3>
+          <p class="card__desc">Cortes tradicionales con acabado impecable, adaptados a tu estilo.</p>
+          <span class="card__price">$10</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 v14 c0 8 4 14 10 22 c6 -8 10 -14 10 -22 V6"/><path d="M14 14 h20"/></svg>
+          </div>
+          <h3 class="card__title">Arreglo de Barba</h3>
+          <p class="card__desc">Perfilado y diseño de barba con navaja y productos especializados.</p>
+          <span class="card__price">$8</span>
+        </article>
+
+        <article class="card card--featured">
+          <div class="card__badge">Más Popular</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="12" height="26" rx="6"/><path d="M18 10 h12 M18 16 h12 M18 22 h12" stroke-width="1.6"/><path d="M24 30 v10"/><path d="M17 44 h14"/></svg>
+          </div>
+          <h3 class="card__title">Combo Completo</h3>
+          <p class="card__desc">Corte + Barba en una sola sesión. La experiencia completa BLASH.</p>
+          <span class="card__price">$16</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
+          </div>
+          <h3 class="card__title">Fade / Degradado</h3>
+          <p class="card__desc">Degradados modernos con precisión, ideales para un look actual.</p>
+          <span class="card__price">$12</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIOS ===================== -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title reveal-item">Lo que dicen <span>nuestros clientes</span></h2>
+      <p class="section-subtitle reveal-item" style="--delay:.1s">Calificación de 4.9/5 basada en más de 500 clientes</p>
+
+      <div class="testimonials__grid">
+        <article class="testimonial reveal-item" style="--delay:.05s">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">“Excelente atención desde que llegas. El fade me quedó exactamente como lo pedí y el ambiente es muy cómodo.”</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">JP</span>
+            <div>
+              <strong>José P.</strong>
+              <small>Cliente frecuente</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial reveal-item" style="--delay:.15s">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">“Lo mejor de Calderón. Puntualidad, buen trato y el combo de corte + barba tiene una excelente relación calidad-precio.”</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">MR</span>
+            <div>
+              <strong>Miguel R.</strong>
+              <small>Cliente frecuente</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial reveal-item" style="--delay:.25s">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">“Reservé mi cita por WhatsApp en segundos y me atendieron puntual. Sin duda mi barbería de confianza ahora.”</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">AC</span>
+            <div>
+              <strong>Andrés C.</strong>
+              <small>Nuevo cliente</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE NOSOTROS ===================== -->
+  <section class="about" id="nosotros">
+    <div class="container about__inner">
+      <div class="about__image">
+        <div class="about__image-frame">
+          <img src="assets/gallery-6.svg" alt="Ambiente de la barbería BLASH">
+        </div>
+      </div>
+      <div class="about__text">
+        <h2 class="section-title section-title--left">Sobre Nosotros</h2>
+        <p>
+          <strong>BLASH</strong> nace como un espacio nuevo y fresco dentro de la
+          parroquia Calderón, creado para hombres que valoran el detalle y el buen cuidado de su
+          imagen personal.
+        </p>
+        <p>
+          Combinamos técnicas clásicas de barbería con tendencias modernas, en un ambiente cómodo,
+          limpio y con la mejor atención. Nuestro objetivo es que cada cliente salga con la
+          confianza de lucir su mejor versión.
+        </p>
+        <ul class="about__list">
+          <li>✔ Barberos profesionales y capacitados</li>
+          <li>✔ Productos de alta calidad</li>
+          <li>✔ Ambiente moderno y acogedor</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UBICACIÓN Y HORARIOS ===================== -->
+  <section class="location" id="ubicacion">
+    <div class="container location__inner">
+      <div class="location__info">
+        <h2 class="section-title section-title--left">Ubicación y Horarios</h2>
+
+        <div class="info-item">
+          <span class="info-item__icon">📍</span>
+          <div>
+            <h4>Dirección</h4>
+            <p>Av. Geovanny Calles y Carapungo, Calderón, Quito - Ecuador</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-item__icon">🕒</span>
+          <div>
+            <h4>Horario de Atención</h4>
+            <p>Lunes a Sábado: 9:00 - 20:00</p>
+          </div>
+        </div>
+
+        <a
+          href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH"
+          class="btn btn--whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+
+      <div class="location__map">
+        <iframe
+          title="Ubicación BLASH"
+          src="https://www.google.com/maps?q=Calder%C3%B3n%2C%20Quito&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          tabindex="-1"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PREGUNTAS FRECUENTES ===================== -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="section-title reveal-item">Preguntas <span>Frecuentes</span></h2>
+      <p class="section-subtitle reveal-item" style="--delay:.1s">Resolvemos tus dudas antes de tu visita</p>
+
+      <div class="faq__list">
+        <div class="faq__item reveal-item" style="--delay:.05s">
+          <button type="button" class="faq__question">
+            ¿Necesito reservar cita con anticipación?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>No es obligatorio, pero te recomendamos agendar por WhatsApp o desde el botón "Agendar Cita" para asegurar tu horario preferido, especialmente los fines de semana.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal-item" style="--delay:.1s">
+          <button type="button" class="faq__question">
+            ¿Puedo elegir un barbero específico?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Sí. En el paso 2 de la reserva puedes elegir a Jonathan, Steven o dejar que te atienda el primer barbero disponible.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal-item" style="--delay:.15s">
+          <button type="button" class="faq__question">
+            ¿Qué formas de pago aceptan?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Aceptamos efectivo y transferencia. Pronto habilitaremos pago con tarjeta directamente en el local.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal-item" style="--delay:.2s">
+          <button type="button" class="faq__question">
+            ¿Cuánto dura un corte o combo?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Un corte clásico toma alrededor de 30 minutos y el Combo Completo (corte + barba) alrededor de 50 minutos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col">
+        <p class="footer__logo">BLASH</p>
+        <p class="footer__tagline">Barbería premium en el corazón de Calderón, Quito.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Enlaces</h4>
+        <ul class="footer__links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Síguenos</h4>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H7.9V12h2.6V9.8c0-2.6 1.5-4 3.9-4 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.4 2 2 3.5 4 3.8v3a7 7 0 0 1-4-1.3v6a5.3 5.3 0 1 1-4.6-5.3v3.1a2.3 2.3 0 1 0 1.6 2.2V3z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer__rights">&copy; 2026 BLASH. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- ===================== MODAL: RESERVA EN 3 PASOS ===================== -->
+  <div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+      <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
+
+      <h3 id="bookingTitle">Reserva tu cita</h3>
+
+      <div class="modal__steps">
+        <span class="modal__step is-active" data-step-indicator="1">1. Servicio</span>
+        <span class="modal__step" data-step-indicator="2">2. Barbero</span>
+        <span class="modal__step" data-step-indicator="3">3. Fecha y hora</span>
+      </div>
+
+      <form id="bookingForm">
+        <div class="modal__panel is-active" data-panel="1">
+          <p class="modal__hint">Elige tu servicio</p>
+          <div class="option-grid">
+            <label class="option-card">
+              <input type="radio" name="servicio" value="Corte Clásico ($10)" checked>
+              <span>Corte Clásico<small>$10</small></span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="servicio" value="Arreglo de Barba ($8)">
+              <span>Arreglo de Barba<small>$8</small></span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="servicio" value="Combo Completo ($16)">
+              <span>Combo Completo<small>$16</small></span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="servicio" value="Fade / Degradado ($12)">
+              <span>Fade / Degradado<small>$12</small></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal__panel" data-panel="2">
+          <p class="modal__hint">Elige tu barbero</p>
+          <div class="option-grid">
+            <label class="option-card">
+              <input type="radio" name="barbero" value="Cualquiera disponible" checked>
+              <span>Cualquiera disponible</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="barbero" value="Jonathan">
+              <span>Jonathan</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="barbero" value="Steven">
+              <span>Steven</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal__panel" data-panel="3">
+          <p class="modal__hint">Elige fecha y hora</p>
+          <div class="booking-picker">
+            <section class="booking-time-picker" aria-labelledby="timePickerTitle">
+              <h4 id="timePickerTitle">Selecciona una hora</h4>
+              <div class="booking-times" id="bookingTimes" role="group" aria-label="Horas disponibles"></div>
+            </section>
+
+            <section class="booking-calendar" aria-labelledby="calendarTitle">
+              <div class="calendar-toolbar">
+                <button type="button" class="calendar-nav" id="monthPrev" aria-label="Mes anterior">‹</button>
+                <h4 id="calendarTitle">Selecciona fecha</h4>
+                <button type="button" class="calendar-nav" id="monthNext" aria-label="Mes siguiente">›</button>
+              </div>
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+              </div>
+              <div class="calendar-days" id="calendarDays" role="grid" aria-label="Días disponibles"></div>
+              <p class="calendar-zone">Zona horaria: <strong>America/Guayaquil</strong></p>
+            </section>
+          </div>
+          <input type="hidden" name="fecha" id="bookingDate" required>
+          <input type="hidden" name="hora" id="bookingTime" required>
+        </div>
+      </form>
+
+      <div class="modal__nav">
+        <button type="button" class="btn btn--outline" id="modalPrev" disabled>Atrás</button>
+        <button type="button" class="btn btn--gold" id="modalNext">Siguiente</button>
+        <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar cita por WhatsApp</button>
+      </div>
+
+      <div class="booking-confirmation" id="bookingConfirmation" role="status" aria-live="polite" hidden>
+        <span class="booking-confirmation__icon" aria-hidden="true">✓</span>
+        <h4>Cita confirmada</h4>
+        <p>Tu reserva quedó registrada en este dispositivo. Envía el mensaje de WhatsApp para que BLASH confirme tu horario.</p>
+        <div class="booking-confirmation__details" id="bookingConfirmationDetails"></div>
+        <button type="button" class="btn btn--gold" id="newBooking">Hacer otra reserva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: ANTES Y DESPUÉS ===================== -->
+  <div class="modal" id="transformModal" aria-hidden="true">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__box modal__box--wide" role="dialog" aria-modal="true" aria-labelledby="transformTitle">
+      <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
+
+      <h3 id="transformTitle">Antes <span>y Después</span></h3>
+      <p class="modal__hint">Desliza el control para ver la transformación</p>
+
+      <div class="ba-slider" id="baSlider">
+        <img class="ba-slider__img" src="assets/before.svg" alt="Antes del corte">
+        <div class="ba-slider__after-wrap" id="baAfterWrap">
+          <img class="ba-slider__img" src="assets/after.svg" alt="Después del corte">
+        </div>
+
+        <span class="ba-slider__label ba-slider__label--before">Antes</span>
+        <span class="ba-slider__label ba-slider__label--after">Después</span>
+
+        <div class="ba-slider__handle" id="baHandle">↔</div>
+        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Deslizador antes y después">
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== BOTÓN FLOTANTE DE WHATSAPP ===================== -->
+  <a
+    href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Escríbenos por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
+  </a>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>
