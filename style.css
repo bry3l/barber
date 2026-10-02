@@ -1706,155 +1706,243 @@ main {
   font-size: 16px;
 }
 
+/* =====================================================
+   PRODUCTOS - CARRUSEL
+===================================================== */
 
-/* ========================================
-   CARRUSEL
-======================================== */
+.products-section {
+  width: 100%;
+  padding: 100px 0;
+  background: #151515;
+  box-sizing: border-box;
+}
 
-.carousel {
+
+/* =====================================================
+   TITULO
+===================================================== */
+
+.products-heading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 55px;
+  box-sizing: border-box;
+}
+
+.products-heading h2 {
+  margin: 0;
+  color: #f5f5f5;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.products-heading h2 span {
+  color: #c9a23d;
+}
+
+.products-heading p {
+  margin: 12px 0 0;
+
+  color: #a9a9a9;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.products-carousel {
   position: relative;
 
-  width: min(1200px, calc(100% - 120px));
+  width: min(1280px, calc(100% - 140px));
+
   margin: 0 auto;
 
   box-sizing: border-box;
 }
 
 
-/* ========================================
+/* =====================================================
    VENTANA
-======================================== */
+===================================================== */
 
-.carousel-viewport {
+.products-window {
   width: 100%;
+
   overflow: hidden;
+
+  box-sizing: border-box;
 }
 
 
-/* ========================================
+/* =====================================================
    TRACK
-======================================== */
+===================================================== */
 
-.carousel-track {
-  display: flex;
+.products-track {
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  flex-wrap: nowrap !important;
+
+  align-items: stretch;
+
   gap: 24px;
 
-  transition: transform 0.45s ease;
+  width: max-content;
 
-  will-change: transform;
+  margin: 0;
+
+  padding: 0;
+
+  transition: transform 0.5s cubic-bezier(.22,.61,.36,1);
+
+  box-sizing: border-box;
 }
 
 
-/* ========================================
+/* =====================================================
    TARJETA
-======================================== */
+===================================================== */
 
-.product-card {
-  flex: 0 0 calc((100% - 48px) / 3);
+.product-item {
+  position: relative;
 
-  min-width: 0;
+  flex: 0 0 300px !important;
+
+  width: 300px;
+
+  min-width: 300px;
+
+  max-width: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
 
   background: #1d1d1d;
 
   border: 1px solid rgba(201, 162, 61, 0.45);
 
-  border-radius: 16px;
-
-  overflow: hidden;
+  border-radius: 18px;
 
   box-sizing: border-box;
 
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
 }
 
 
 /* Hover */
 
-.product-card:hover {
-  transform: translateY(-6px);
+.product-item:hover {
+  transform: translateY(-7px);
 
   border-color: #c9a23d;
 
   box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.35);
+    0 20px 40px rgba(0, 0, 0, .35);
 }
 
 
-/* ========================================
-   IMAGEN
-======================================== */
+/* =====================================================
+   FOTO
+===================================================== */
 
-.product-image {
+.product-photo {
   position: relative;
 
   width: 100%;
-  height: 220px;
+
+  height: 235px;
+
+  flex-shrink: 0;
 
   overflow: hidden;
 
-  background: #222;
+  background: #252525;
 }
 
-.product-image img {
+
+.product-photo img {
   display: block;
 
   width: 100%;
+
   height: 100%;
 
   object-fit: cover;
 
   object-position: center;
 
-  transition: transform 0.4s ease;
+  border: 0;
+
+  transition: transform .5s ease;
 }
 
 
-/* Zoom suave */
-
-.product-card:hover .product-image img {
-  transform: scale(1.04);
+.product-item:hover .product-photo img {
+  transform: scale(1.05);
 }
 
 
-/* ========================================
-   BADGE
-======================================== */
+/* =====================================================
+   ETIQUETA
+===================================================== */
 
-.product-badge {
+.product-tag {
   position: absolute;
 
   top: 14px;
   left: 14px;
 
-  padding: 7px 11px;
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 7px 12px;
 
   background: #c9a23d;
+
   color: #111;
 
-  border-radius: 20px;
+  border-radius: 30px;
 
   font-family: Arial, sans-serif;
-  font-size: 11px;
+
+  font-size: 10px;
+
   font-weight: 800;
 
-  letter-spacing: 0.3px;
+  letter-spacing: .3px;
+
+  white-space: nowrap;
 }
 
 
-/* ========================================
-   CONTENIDO
-======================================== */
+/* =====================================================
+   INFORMACIÓN
+===================================================== */
 
-.product-content {
-  padding: 22px 20px 18px;
-
-  min-height: 220px;
-
+.product-info {
   display: flex;
+
   flex-direction: column;
+
+  flex: 1;
+
+  padding: 20px;
 
   box-sizing: border-box;
 }
@@ -1862,29 +1950,35 @@ main {
 
 /* Categoría */
 
-.product-category {
+.product-type {
+  display: block;
+
+  margin-bottom: 8px;
+
   color: #c9a23d;
 
   font-family: Arial, sans-serif;
 
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px;
 
-  letter-spacing: 0.7px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
 }
 
 
 /* Título */
 
-.product-content h3 {
-  margin: 8px 0 7px;
+.product-info h3 {
+  margin: 0 0 8px;
 
-  color: #f4f4f4;
+  color: #f3f3f3;
 
-  font-family: Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
 
   font-size: 21px;
-  line-height: 1.15;
+
+  line-height: 1.2;
 
   font-weight: 700;
 }
@@ -1892,253 +1986,243 @@ main {
 
 /* Descripción */
 
-.product-content p {
+.product-info p {
   margin: 0;
 
-  color: #aaa;
+  color: #a6a6a6;
 
   font-family: Arial, sans-serif;
 
-  font-size: 14px;
+  font-size: 13px;
 
   line-height: 1.5;
 }
 
 
-/* ========================================
-   PRECIO + BOTÓN
-======================================== */
+/* =====================================================
+   FOOTER
+===================================================== */
 
-.product-bottom {
+.product-footer {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
+  gap: 15px;
+
   margin-top: auto;
+
   padding-top: 18px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 
 
-.product-bottom strong {
+.product-footer strong {
   color: #c9a23d;
 
   font-family: Arial, sans-serif;
 
-  font-size: 21px;
+  font-size: 20px;
+
   font-weight: 800;
 }
 
 
-/* ========================================
-   BOTÓN PEDIR
-======================================== */
+/* =====================================================
+   BOTÓN
+===================================================== */
 
-.order-btn {
-  padding: 9px 18px;
+.product-footer button {
+  appearance: none;
 
   border: 1px solid #c9a23d;
 
-  border-radius: 22px;
-
   background: transparent;
 
-  color: #f5f5f5;
+  color: #f4f4f4;
+
+  border-radius: 30px;
+
+  padding: 9px 17px;
 
   font-family: Arial, sans-serif;
 
-  font-size: 13px;
+  font-size: 12px;
+
   font-weight: 700;
 
   cursor: pointer;
 
   transition:
-    background 0.25s ease,
-    color 0.25s ease;
+    background .25s ease,
+    color .25s ease;
 }
 
 
-.order-btn:hover {
+.product-footer button:hover {
   background: #c9a23d;
+
   color: #111;
 }
 
 
-/* ========================================
+/* =====================================================
    FLECHAS
-======================================== */
+===================================================== */
 
-.carousel-btn {
+.products-arrow {
   position: absolute;
 
   top: 50%;
 
+  z-index: 50;
+
   transform: translateY(-50%);
 
-  z-index: 20;
-
   width: 48px;
+
   height: 48px;
 
-  border-radius: 50%;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
 
   border: 1px solid #c9a23d;
+
+  border-radius: 50%;
 
   background: #151515;
 
   color: #fff;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 30px;
-  line-height: 1;
+  font-size: 22px;
 
   cursor: pointer;
 
   transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease;
 }
 
 
-.carousel-btn:hover {
+.products-arrow:hover {
   background: #c9a23d;
+
   color: #111;
 
   transform: translateY(-50%) scale(1.08);
 }
 
 
-/* IZQUIERDA */
-
-.carousel-prev {
+.products-arrow-left {
   left: -65px;
 }
 
 
-/* DERECHA */
-
-.carousel-next {
+.products-arrow-right {
   right: -65px;
 }
 
 
-/* ========================================
-   DESKTOP GRANDE
-======================================== */
-
-@media (min-width: 1400px) {
-
-  .carousel {
-    width: 1200px;
-  }
-
-}
-
-
-/* ========================================
+/* =====================================================
    TABLET
-======================================== */
+===================================================== */
 
 @media (max-width: 1000px) {
 
-  .carousel {
+  .products-carousel {
     width: calc(100% - 100px);
   }
 
-  .product-card {
-    flex: 0 0 calc((100% - 24px) / 2);
+  .product-item {
+    flex-basis: 280px !important;
+
+    width: 280px;
+
+    min-width: 280px;
+
+    max-width: 280px;
   }
 
-  .carousel-prev {
+  .products-arrow-left {
     left: -55px;
   }
 
-  .carousel-next {
+  .products-arrow-right {
     right: -55px;
   }
 
 }
 
 
-/* ========================================
+/* =====================================================
    MÓVIL
-======================================== */
+===================================================== */
 
 @media (max-width: 600px) {
 
   .products-section {
-    padding: 65px 0;
+    padding: 70px 0;
   }
 
-
-  .products-header {
-    margin-bottom: 35px;
+  .products-heading {
     padding: 0 20px;
+
+    margin-bottom: 35px;
   }
 
-
-  .products-header h2 {
+  .products-heading h2 {
     font-size: 30px;
   }
 
-
-  .products-header p {
+  .products-heading p {
     font-size: 14px;
   }
 
-
-  .carousel {
+  .products-carousel {
     width: calc(100% - 40px);
   }
 
-
-  .carousel-track {
+  .products-track {
     gap: 16px;
   }
 
+  .product-item {
+    flex: 0 0 calc(100vw - 80px) !important;
 
-  .product-card {
-    flex: 0 0 88%;
+    width: calc(100vw - 80px);
+
+    min-width: calc(100vw - 80px);
+
+    max-width: calc(100vw - 80px);
   }
 
-
-  .product-image {
-    height: 210px;
+  .product-photo {
+    height: 230px;
   }
 
-
-  .product-content {
-    min-height: 210px;
-    padding: 20px 18px 17px;
-  }
-
-
-  .product-content h3 {
-    font-size: 19px;
-  }
-
-
-  .carousel-btn {
+  .products-arrow {
     width: 40px;
     height: 40px;
 
-    font-size: 25px;
+    font-size: 18px;
   }
 
-
-  .carousel-prev {
-    left: -15px;
+  .products-arrow-left {
+    left: -18px;
   }
 
-
-  .carousel-next {
-    right: -15px;
+  .products-arrow-right {
+    right: -18px;
   }
 
 }
+
