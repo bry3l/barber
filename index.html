@@ -180,157 +180,174 @@
     </div>
   </section>
 
-  <!-- ===================== CARRUSEL DE PRODUCTOS ===================== -->
-  <section class="products-section" id="productos">
-    <div class="container">
-      <h2 class="section-title">Productos <span>Exclusivos</span></h2>
-      <p class="section-subtitle">Lleva el cuidado y el acabado profesional a tu casa</p>
+<section class="products-section">
 
-      <div class="products-carousel-container">
-        <!-- Flecha Izquierda -->
-        <button type="button" class="carousel-arrow prev" id="prodPrev" aria-label="Producto anterior">&#10094;</button>
+  <div class="products-heading">
+    <h2>Productos <span>Exclusivos</span></h2>
+    <p>Lleva el cuidado y el acabado profesional a tu casa</p>
+  </div>
 
-        <!-- Track con los productos -->
-        <div class="products-track" id="productsTrack">
+  <div class="products-carousel">
 
-          <!-- Producto 1 -->
-          <article class="product-card">
-            <span class="product-badge">Top Ventas</span>
-            <div class="product-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1597854710119-a5a84399e937?auto=format&fit=crop&w=500&q=80" alt="Pomada Mate" loading="lazy">
-            </div>
-            <div class="product-card__info">
-              <span class="product-category">Peinado & Fijación</span>
-              <h3 class="product-name">Pomada Mate Matte Clay</h3>
-              <p class="product-desc">Fijación fuerte y acabado natural sin brillo. No deja residuos ni grasa.</p>
-              <div class="product-footer">
-                <span class="product-price">$14.00</span>
-                <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20comprar%20la%20Pomada%20Mate%20Matte%20Clay" target="_blank" rel="noopener noreferrer" class="btn-product">Pedir</a>
-              </div>
-            </div>
-          </article>
+    <button
+      class="products-arrow products-arrow-left"
+      id="productsPrev"
+      aria-label="Productos anteriores"
+    >
+      ←
+    </button>
 
-          <!-- Producto 2 -->
-          <article class="product-card">
-            <span class="product-badge">Recomendado</span>
-            <div class="product-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=500&q=80" alt="Óleo para Barba" loading="lazy">
-            </div>
-            <div class="product-card__info">
-              <span class="product-category">Cuidado Facial</span>
-              <h3 class="product-name">Óleo para Barba Wood & Spice</h3>
-              <p class="product-desc">Hidrata la piel bajo la barba, reduce la picazón y aporta brillo sutil.</p>
-              <div class="product-footer">
-                <span class="product-price">$12.50</span>
-                <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20comprar%20el%20Óleo%20para%20Barba" target="_blank" rel="noopener noreferrer" class="btn-product">Pedir</a>
-              </div>
-            </div>
-          </article>
+    <div class="products-window">
 
-          <!-- Producto 3 -->
-          <article class="product-card">
-            <div class="product-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80" alt="Polvo Texturizador" loading="lazy">
-            </div>
-            <div class="product-card__info">
-              <span class="product-category">Volumen & Textura</span>
-              <h3 class="product-name">Polvo Texturizador Matt</h3>
-              <p class="product-desc">Da volumen instantáneo en la raíz y textura para peinados con fade.</p>
-              <div class="product-footer">
-                <span class="product-price">$11.00</span>
-                <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20comprar%20el%20Polvo%20Texturizador" target="_blank" rel="noopener noreferrer" class="btn-product">Pedir</a>
-              </div>
-            </div>
-          </article>
+      <div class="products-track" id="productsTrack">
 
-          <!-- Producto 4 -->
-          <article class="product-card">
-            <div class="product-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1608248597359-52e673238fc6?auto=format&fit=crop&w=500&q=80" alt="After Shave" loading="lazy">
-            </div>
-            <div class="product-card__info">
-              <span class="product-category">Post Afeitado</span>
-              <h3 class="product-name">After Shave Refrescante Mint</h3>
-              <p class="product-desc">Calma la irritación tras la navaja, desinfecta y deja sensación fresca.</p>
-              <div class="product-footer">
-                <span class="product-price">$9.50</span>
-                <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20comprar%20el%20After%20Shave" target="_blank" rel="noopener noreferrer" class="btn-product">Pedir</a>
-              </div>
-            </div>
-          </article>
+        <!-- PRODUCTO -->
+        <article class="product-item">
 
-          <!-- Producto 5 -->
-          <article class="product-card">
-            <span class="product-badge">Especial</span>
-            <div class="product-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=500&q=80" alt="Shampoo Fortificante" loading="lazy">
-            </div>
-            <div class="product-card__info">
-              <span class="product-category">Cuidado Capilar</span>
-              <h3 class="product-name">Shampoo Fortificante Mentol</h3>
-              <p class="product-desc">Limpia a fondo, estimula el folículo y controla el exceso de grasa.</p>
-              <div class="product-footer">
-                <span class="product-price">$13.00</span>
-                <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20comprar%20el%20Shampoo%20Fortificante" target="_blank" rel="noopener noreferrer" class="btn-product">Pedir</a>
-              </div>
-            </div>
-          </article>
+          <div class="product-photo">
+            <img src="images/pomada-mate.jpg" alt="Pomada Mate Matte Clay">
+            <span class="product-tag">TOP VENTAS</span>
+          </div>
 
-        </div>
+          <div class="product-info">
+            <span class="product-type">PEINADO & FIJACIÓN</span>
 
-        <!-- Flecha Derecha -->
-        <button type="button" class="carousel-arrow next" id="prodNext" aria-label="Siguiente producto">&#10095;</button>
+            <h3>Pomada Mate Matte Clay</h3>
+
+            <p>
+              Fijación fuerte y acabado natural sin brillo.
+              No deja residuos ni grasa.
+            </p>
+
+            <div class="product-footer">
+              <strong>$14.00</strong>
+              <button>Pedir</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <!-- PRODUCTO -->
+        <article class="product-item">
+
+          <div class="product-photo">
+            <img src="images/aceite-barba.jpg" alt="Óleo para Barba Wood & Spice">
+            <span class="product-tag">RECOMENDADO</span>
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">CUIDADO FACIAL</span>
+
+            <h3>Óleo para Barba Wood & Spice</h3>
+
+            <p>
+              Hidrata la piel bajo la barba, reduce
+              la picazón y aporta brillo sutil.
+            </p>
+
+            <div class="product-footer">
+              <strong>$12.50</strong>
+              <button>Pedir</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <!-- PRODUCTO -->
+        <article class="product-item">
+
+          <div class="product-photo">
+            <img src="images/polvo-texturizado.jpg" alt="Polvo Texturizado Matt">
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">VOLUMEN & TEXTURA</span>
+
+            <h3>Polvo Texturizado Matt</h3>
+
+            <p>
+              Da volumen instantáneo en la raíz y
+              textura para peinados con fade.
+            </p>
+
+            <div class="product-footer">
+              <strong>$11.00</strong>
+              <button>Pedir</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <!-- PRODUCTO -->
+        <article class="product-item">
+
+          <div class="product-photo">
+            <img src="images/after-shave.jpg" alt="After Shave Refrescante Mint">
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">POST AFEITADO</span>
+
+            <h3>After Shave Refrescante Mint</h3>
+
+            <p>
+              Calma la irritación tras la navaja,
+              desinfecta y deja sensación fresca.
+            </p>
+
+            <div class="product-footer">
+              <strong>$9.50</strong>
+              <button>Pedir</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <!-- PRODUCTO -->
+        <article class="product-item">
+
+          <div class="product-photo">
+            <img src="images/shampoo.jpg" alt="Shampoo Profesional">
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">CUIDADO CAPILAR</span>
+
+            <h3>Shampoo Profesional</h3>
+
+            <p>
+              Limpieza profunda y cuidado diario
+              para todo tipo de cabello.
+            </p>
+
+            <div class="product-footer">
+              <strong>$13.00</strong>
+              <button>Pedir</button>
+            </div>
+          </div>
+
+        </article>
+
       </div>
+
     </div>
-  </section>
 
-  <!-- ===================== TESTIMONIOS ===================== -->
-  <section class="testimonials">
-  <!-- ===================== TESTIMONIOS ===================== -->
-  <section class="testimonials">
-    <div class="container">
-      <h2 class="section-title reveal-item">Lo que dicen <span>nuestros clientes</span></h2>
-      <p class="section-subtitle reveal-item" style="--delay:.1s">Calificación de 4.9/5 basada en más de 500 clientes</p>
+    <button
+      class="products-arrow products-arrow-right"
+      id="productsNext"
+      aria-label="Siguientes productos"
+    >
+      →
+    </button>
 
-      <div class="testimonials__grid">
-        <article class="testimonial reveal-item" style="--delay:.05s">
-          <div class="testimonial__stars">★★★★★</div>
-          <p class="testimonial__text">“Excelente atención desde que llegas. El fade me quedó exactamente como lo pedí y el ambiente es muy cómodo.”</p>
-          <div class="testimonial__author">
-            <span class="testimonial__avatar">JP</span>
-            <div>
-              <strong>José P.</strong>
-              <small>Cliente frecuente</small>
-            </div>
-          </div>
-        </article>
+  </div>
 
-        <article class="testimonial reveal-item" style="--delay:.15s">
-          <div class="testimonial__stars">★★★★★</div>
-          <p class="testimonial__text">“Lo mejor de Calderón. Puntualidad, buen trato y el combo de corte + barba tiene una excelente relación calidad-precio.”</p>
-          <div class="testimonial__author">
-            <span class="testimonial__avatar">MR</span>
-            <div>
-              <strong>Miguel R.</strong>
-              <small>Cliente frecuente</small>
-            </div>
-          </div>
-        </article>
+</section>
 
-        <article class="testimonial reveal-item" style="--delay:.25s">
-          <div class="testimonial__stars">★★★★★</div>
-          <p class="testimonial__text">“Reservé mi cita por WhatsApp en segundos y me atendieron puntual. Sin duda mi barbería de confianza ahora.”</p>
-          <div class="testimonial__author">
-            <span class="testimonial__avatar">AC</span>
-            <div>
-              <strong>Andrés C.</strong>
-              <small>Nuevo cliente</small>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
   
 
