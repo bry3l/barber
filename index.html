@@ -12,24 +12,36 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BLASH | Barbería en Calderón, Quito">
   <meta property="og:description" content="Barbería premium en Calderón, Quito. Cortes clásicos, fades, barba y combos.">
-  <meta property="og:image" content="assets/hero-main.svg">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80">
 
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Cuadrícula fija 3/3 para los 6 servicios */
+    .services__grid--3col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 820px) {
+      .services__grid--3col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- =========================================================
-       1. HEADER & NAVEGACIÓN
-       ========================================================= -->
+  <!-- ===================== HEADER ===================== -->
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#inicio" class="logo">
         <span class="logo__icon" aria-hidden="true">
-          <img src="assets/logo.svg" alt="">
+          <img src="assets/logo.svg" alt="" onerror="this.style.display='none'">
         </span>
         BLASH
       </a>
@@ -54,9 +66,7 @@
     </div>
   </header>
 
-  <!-- =========================================================
-       2. HERO (PORTADA PRINCIPAL)
-       ========================================================= -->
+  <!-- ===================== HERO ===================== -->
   <section class="hero" id="inicio">
     <div class="hero__overlay"></div>
     <div class="container hero__grid">
@@ -75,34 +85,16 @@
           Cortes clásicos, degradados modernos y cuidado de barba profesional en un ambiente exclusivo pensado para tu comodidad e imagen.
         </p>
 
-       <!-- ===================== MODAL: ANTES Y DESPUÉS REAL ===================== -->
-  <div class="modal" id="transformModal" aria-hidden="true">
-    <div class="modal__overlay" data-close-modal></div>
-    <div class="modal__box modal__box--wide" role="dialog" aria-modal="true">
-      <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
-      <h3>Transformación <span>Real</span></h3>
-      <p class="modal__hint">Desliza el control de izquierda a derecha</p>
-
-      <div class="ba-slider" id="baSlider">
-        <!-- ANTES: Cabello largo / desordenado -->
-        <img class="ba-slider__img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=900&auto=format&fit=crop&q=80" alt="Antes del corte: cabello largo">
-        
-        <!-- DESPUÉS: Corte fade limpio y barba perfilada -->
-        <div class="ba-slider__after-wrap" id="baAfterWrap">
-          <img class="ba-slider__img" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=900&auto=format&fit=crop&q=80" alt="Después del corte: fade profesional">
+        <div class="hero__actions reveal-item">
+          <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
+          <button type="button" class="btn btn--outline" data-open-modal="transformModal">
+            <span class="btn__play">▶</span> Ver Transformaciones
+          </button>
         </div>
-
-        <span class="ba-slider__label ba-slider__label--before">Antes</span>
-        <span class="ba-slider__label ba-slider__label--after">Después</span>
-        <div class="ba-slider__handle" id="baHandle">↔</div>
-        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Control deslizante">
       </div>
-    </div>
-  </div>
 
       <div class="hero__visual reveal-item">
         <div class="hero__image-main">
-          <!-- Foto de barbería con carga rápida vía CDN -->
           <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80" alt="Instalaciones y sillones BLASH" loading="eager">
         </div>
         <div class="hero__floating-card">
@@ -118,40 +110,36 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       3. MÉTRICAS / ESTADÍSTICAS
-       ========================================================= -->
+  <!-- ===================== ESTADÍSTICAS ===================== -->
   <section class="stats">
     <div class="container stats__grid">
       <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="500" data-suffix="+">0</span>
+        <span class="stat__number" data-count-to="500" data-suffix="+">500+</span>
         <span class="stat__label">Clientes felices</span>
       </div>
       <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="4.9" data-decimals="1">0</span>
+        <span class="stat__number" data-count-to="4.9" data-decimals="1">4.9</span>
         <span class="stat__label">Calificación Google</span>
       </div>
       <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="6" data-suffix="+">0</span>
+        <span class="stat__number" data-count-to="6" data-suffix="+">6+</span>
         <span class="stat__label">Años de trayectoria</span>
       </div>
       <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="3">0</span>
+        <span class="stat__number" data-count-to="3">3</span>
         <span class="stat__label">Barberos certificados</span>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       4. SERVICIOS (6 OPCIONES COMPLETAS)
-       ========================================================= -->
+  <!-- ===================== 6 SERVICIOS (CUADRADOS 3 Y 3) ===================== -->
   <section class="services" id="servicios">
     <div class="container">
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-subtitle">Técnicas de precisión y cuidado al detalle</p>
 
-      <div class="services__grid">
-        <!-- Servicio 1 -->
+      <div class="services__grid--3col">
+        <!-- Fila 1 - Col 1 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
@@ -161,7 +149,7 @@
           <span class="card__price">$10</span>
         </article>
 
-        <!-- Servicio 2 -->
+        <!-- Fila 1 - Col 2 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 v14 c0 8 4 14 10 22 c6 -8 10 -14 10 -22 V6"/><path d="M14 14 h20"/></svg>
@@ -171,7 +159,7 @@
           <span class="card__price">$8</span>
         </article>
 
-        <!-- Servicio 3 (Destacado) -->
+        <!-- Fila 1 - Col 3 -->
         <article class="card card--featured">
           <div class="card__badge">Más Popular</div>
           <div class="card__icon">
@@ -182,7 +170,7 @@
           <span class="card__price">$16</span>
         </article>
 
-        <!-- Servicio 4 -->
+        <!-- Fila 2 - Col 1 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
@@ -192,7 +180,7 @@
           <span class="card__price">$12</span>
         </article>
 
-        <!-- Servicio 5 -->
+        <!-- Fila 2 - Col 2 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M16 28 c3 4 13 4 16 0"/><circle cx="19" cy="20" r="2" fill="currentColor"/><circle cx="29" cy="20" r="2" fill="currentColor"/></svg>
@@ -202,7 +190,7 @@
           <span class="card__price">$10</span>
         </article>
 
-        <!-- Servicio 6 -->
+        <!-- Fila 2 - Col 3 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40 L36 16 M28 8 L40 20"/><path d="M8 44 l4 -4"/></svg>
@@ -215,9 +203,7 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       5. PRODUCTOS (10 ARTÍCULOS EN CARRUSEL)
-       ========================================================= -->
+  <!-- ===================== 10 PRODUCTOS (CARRUSEL DIRECCIONAL) ===================== -->
   <section class="products-section" id="productos">
     <div class="products-heading">
       <h2>Productos <span>Exclusivos</span></h2>
@@ -225,14 +211,14 @@
     </div>
 
     <div class="products-carousel">
-      <button type="button" class="products-arrow products-arrow-left" id="productsPrev" aria-label="Producto anterior">←</button>
+      <button type="button" class="products-arrow products-arrow-left" id="productsPrev" aria-label="Ver productos anteriores">←</button>
 
       <div class="products-window">
         <div class="products-track" id="productsTrack">
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&auto=format&fit=crop&q=80" alt="Pomada Mate">
+              <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&auto=format&fit=crop&q=80" alt="Pomada Mate Matte Clay">
               <span class="product-tag">TOP VENTAS</span>
             </div>
             <div class="product-info">
@@ -248,7 +234,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop&q=80" alt="Óleo para Barba">
+              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop&q=80" alt="Óleo para Barba Wood & Spice">
               <span class="product-tag">RECOMENDADO</span>
             </div>
             <div class="product-info">
@@ -294,7 +280,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&auto=format&fit=crop&q=80" alt="Shampoo Anticaspa">
+              <img src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&auto=format&fit=crop&q=80" alt="Shampoo Purificante">
             </div>
             <div class="product-info">
               <span class="product-type">CUIDADO CAPILAR</span>
@@ -309,7 +295,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1512290900672-1f486b72a0c6?w=600&auto=format&fit=crop&q=80" alt="Pomada al agua">
+              <img src="https://images.unsplash.com/photo-1512290900672-1f486b72a0c6?w=600&auto=format&fit=crop&q=80" alt="Cera Aqua Pomade">
             </div>
             <div class="product-info">
               <span class="product-type">FIJACIÓN</span>
@@ -324,7 +310,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=600&auto=format&fit=crop&q=80" alt="Bálsamo para barba">
+              <img src="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=600&auto=format&fit=crop&q=80" alt="Bálsamo Karité">
             </div>
             <div class="product-info">
               <span class="product-type">CUIDADO BARBA</span>
@@ -339,7 +325,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80" alt="Tónico capilar">
+              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80" alt="Tónico Revitalizante">
             </div>
             <div class="product-info">
               <span class="product-type">TRATAMIENTO</span>
@@ -354,7 +340,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80" alt="Gel de afeitar">
+              <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80" alt="Gel Precisión Clear">
             </div>
             <div class="product-info">
               <span class="product-type">AFEITADO</span>
@@ -369,7 +355,7 @@
 
           <article class="product-item">
             <div class="product-photo">
-              <img src="https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80" alt="Cepillo de cerdas">
+              <img src="https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80" alt="Cepillo Cerdas Jabalí">
             </div>
             <div class="product-info">
               <span class="product-type">HERRAMIENTAS</span>
@@ -385,18 +371,16 @@
         </div>
       </div>
 
-      <button type="button" class="products-arrow products-arrow-right" id="productsNext" aria-label="Producto siguiente">→</button>
+      <button type="button" class="products-arrow products-arrow-right" id="productsNext" aria-label="Ver productos siguientes">→</button>
     </div>
   </section>
 
-  <!-- =========================================================
-       6. SOBRE NOSOTROS (CON FOTO REAL)
-       ========================================================= -->
+  <!-- ===================== SOBRE NOSOTROS ===================== -->
   <section class="about" id="nosotros">
     <div class="container about__inner">
       <div class="about__image">
         <div class="about__image-frame">
-          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Estación y barbero en BLASH Calderón">
+          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Estación de trabajo en BLASH Calderón">
         </div>
       </div>
       <div class="about__text">
@@ -416,9 +400,7 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       7. INSTALACIONES (CARRUSEL)
-       ========================================================= -->
+  <!-- ===================== INSTALACIONES ===================== -->
   <section class="carrusel-section" id="instalaciones">
     <div class="container">
       <h2 class="section-title reveal-item">Conoce <span>Nuestras Instalaciones</span></h2>
@@ -427,25 +409,23 @@
       <div class="carrusel-wrapper">
         <div class="carrusel-track" id="carruselTrack">
           <div class="carrusel-slide">
-            <img src="assets/IMAGEN1.jpg" alt="Instalaciones BLASH 1" loading="lazy">
+            <img src="assets/IMAGEN1.jpg" alt="Instalaciones BLASH 1" onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80'">
             <div class="slide-caption">Ambiente Exclusivo & Estilo BLASH</div>
           </div>
           <div class="carrusel-slide">
-            <img src="assets/IMAGEN2.jpg" alt="Instalaciones BLASH 2" loading="lazy">
+            <img src="assets/IMAGEN2.jpg" alt="Instalaciones BLASH 2" onerror="this.src='https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80'">
             <div class="slide-caption">Estaciones de Corte de Alta Precisión</div>
           </div>
         </div>
 
-        <button type="button" class="carrusel-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
-        <button type="button" class="carrusel-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+        <button type="button" class="carrusel-btn prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
+        <button type="button" class="carrusel-btn next" id="nextBtn" aria-label="Foto siguiente">&#10095;</button>
         <div class="carrusel-dots" id="carruselDots"></div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       8. UBICACIÓN Y HORARIOS
-       ========================================================= -->
+  <!-- ===================== UBICACIÓN ===================== -->
   <section class="location" id="ubicacion">
     <div class="container location__inner">
       <div class="location__info">
@@ -478,9 +458,7 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       9. PREGUNTAS FRECUENTES (FAQ)
-       ========================================================= -->
+  <!-- ===================== FAQ ===================== -->
   <section class="faq">
     <div class="container">
       <h2 class="section-title reveal-item">Preguntas <span>Frecuentes</span></h2>
@@ -513,7 +491,7 @@
             <span class="faq__icon">+</span>
           </button>
           <div class="faq__answer">
-            <p>Recibimos efectivo, transferencias bancarias nacionales (Banco Pichincha, Guayaquil, Pacífico) y Deuna.</p>
+            <p>Recibimos efectivo, transferencias bancarias nacionales y Deuna.</p>
           </div>
         </div>
 
@@ -530,9 +508,7 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       10. FOOTER
-       ========================================================= -->
+  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__col">
@@ -570,9 +546,7 @@
     <p class="footer__rights">&copy; 2026 BLASH. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- =========================================================
-       11. MODAL: RESERVA EN 3 PASOS
-       ========================================================= -->
+  <!-- ===================== MODAL DE RESERVA ===================== -->
   <div class="modal" id="bookingModal" aria-hidden="true">
     <div class="modal__overlay" data-close-modal></div>
     <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
@@ -586,9 +560,8 @@
       </div>
 
       <form id="bookingForm">
-        <!-- Paso 1: Servicios sincronizados -->
         <div class="modal__panel is-active" data-panel="1">
-          <p class="modal__hint">Elige el servicio deseado</p>
+          <p class="modal__hint">Elige tu servicio</p>
           <div class="option-grid">
             <label class="option-card">
               <input type="radio" name="servicio" value="Corte Clásico ($10)" checked>
@@ -617,7 +590,6 @@
           </div>
         </div>
 
-        <!-- Paso 2: Barbero -->
         <div class="modal__panel" data-panel="2">
           <p class="modal__hint">Elige tu barbero</p>
           <div class="option-grid">
@@ -636,12 +608,11 @@
           </div>
         </div>
 
-        <!-- Paso 3: Calendario e Input ocultos -->
         <div class="modal__panel" data-panel="3">
           <p class="modal__hint">Elige fecha y hora</p>
           <div class="booking-picker">
             <section class="booking-time-picker">
-              <h4>Selecciona hora</h4>
+              <h4>Selecciona una hora</h4>
               <div class="booking-times" id="bookingTimes" role="group"></div>
             </section>
 
@@ -666,7 +637,7 @@
       <div class="modal__nav">
         <button type="button" class="btn btn--outline" id="modalPrev" disabled>Atrás</button>
         <button type="button" class="btn btn--gold" id="modalNext">Siguiente</button>
-        <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar cita por WhatsApp</button>
+        <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar por WhatsApp</button>
       </div>
 
       <div class="booking-confirmation" id="bookingConfirmation" hidden>
@@ -679,34 +650,110 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       12. MODAL: ANTES Y DESPUÉS
-       ========================================================= -->
+  <!-- ===================== MODAL DE TRANSFORMACIONES REAL ===================== -->
   <div class="modal" id="transformModal" aria-hidden="true">
     <div class="modal__overlay" data-close-modal></div>
     <div class="modal__box modal__box--wide" role="dialog" aria-modal="true">
       <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
-      <h3>Transformaciones <span>BLASH</span></h3>
-      <p class="modal__hint">Desliza la barra horizontal para ver el cambio</p>
+      <h3>Transformación <span>Real</span></h3>
+      <p class="modal__hint">Desliza la barra para comparar el corte</p>
 
       <div class="ba-slider" id="baSlider">
-        <img class="ba-slider__img" src="assets/IMAGEN1.jpg" alt="Antes del corte">
+        <!-- ANTES: Cabello largo -->
+        <img class="ba-slider__img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=900&auto=format&fit=crop&q=80" alt="Antes del corte: cabello largo">
+        <!-- DESPUÉS: Fade pulido -->
         <div class="ba-slider__after-wrap" id="baAfterWrap">
-          <img class="ba-slider__img" src="assets/IMAGEN2.jpg" alt="Después del corte">
+          <img class="ba-slider__img" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=900&auto=format&fit=crop&q=80" alt="Después del corte: fade profesional">
         </div>
         <span class="ba-slider__label ba-slider__label--before">Antes</span>
         <span class="ba-slider__label ba-slider__label--after">Después</span>
         <div class="ba-slider__handle" id="baHandle">↔</div>
-        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Control deslizante">
+        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Deslizador comparativo">
       </div>
     </div>
   </div>
 
   <!-- Botón WhatsApp Flotante -->
-  <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat directo de WhatsApp">
+  <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
   </a>
 
+  <!-- ===================== SCRIPT DE MOVIMIENTO DIRECCIONAL ===================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. CONTROL DIRECCIONAL EXACTO DEL CARRUSEL DE PRODUCTOS
+      const track = document.getElementById('productsTrack');
+      const prevBtn = document.getElementById('productsPrev');
+      const nextBtn = document.getElementById('productsNext');
+
+      if (track && prevBtn && nextBtn) {
+        let currentTranslate = 0;
+
+        const getCardStep = () => {
+          const item = track.querySelector('.product-item');
+          if (!item) return 304;
+          // Ancho de tarjeta + 24px de gap
+          return item.offsetWidth + 24;
+        };
+
+        const getMaxScroll = () => {
+          const containerWidth = track.parentElement.clientWidth;
+          const totalWidth = track.scrollWidth;
+          return Math.max(0, totalWidth - containerWidth);
+        };
+
+        // Mover a la derecha (mostrar siguientes)
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const step = getCardStep();
+          const max = getMaxScroll();
+          currentTranslate += step;
+
+          if (currentTranslate > max) {
+            currentTranslate = 0; // Vuelve al inicio al completar
+          }
+          track.style.transform = `translateX(-${currentTranslate}px)`;
+        });
+
+        // Mover a la izquierda (mostrar anteriores)
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const step = getCardStep();
+          const max = getMaxScroll();
+          currentTranslate -= step;
+
+          if (currentTranslate < 0) {
+            currentTranslate = max; // Va al final si está al principio
+          }
+          track.style.transform = `translateX(-${currentTranslate}px)`;
+        });
+
+        window.addEventListener('resize', () => {
+          currentTranslate = 0;
+          track.style.transform = 'translateX(0px)';
+        });
+      }
+
+      // 2. SLIDER ANTES Y DESPUÉS
+      const baRange = document.getElementById('baRange');
+      const baAfterWrap = document.getElementById('baAfterWrap');
+      const baHandle = document.getElementById('baHandle');
+      const baSlider = document.getElementById('baSlider');
+
+      if (baRange && baAfterWrap && baHandle && baSlider) {
+        const updateSlider = () => {
+          const val = baRange.value;
+          baAfterWrap.style.width = `${val}%`;
+          baHandle.style.left = `${val}%`;
+          const afterImg = baAfterWrap.querySelector('.ba-slider__img');
+          if (afterImg) afterImg.style.width = `${baSlider.offsetWidth}px`;
+        };
+        baRange.addEventListener('input', updateSlider);
+        window.addEventListener('resize', updateSlider);
+        updateSlider();
+      }
+    });
+  </script>
   <script src="script.js?v=6"></script>
 </body>
 </html>
