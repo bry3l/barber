@@ -1,62 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* =========================================================
-     1. CARRUSEL DE PRODUCTOS (Flechas funcionales)
+     1. CARRUSEL DE PRODUCTOS (DESPLAZAMIENTO DIRECCIONAL)
      ========================================================= */
-  const productsTrack = document.getElementById('productsTrack');
-  const productsPrev = document.getElementById('productsPrev');
-  const productsNext = document.getElementById('productsNext');
+  const prodWindow = document.getElementById('productsWindow');
+  const prodBtnPrev = document.getElementById('prodBtnPrev');
+  const prodBtnNext = document.getElementById('prodBtnNext');
 
-  if (productsTrack && productsPrev && productsNext) {
-    let currentProductIndex = 0;
-
-    const getScrollStep = () => {
-      const firstItem = productsTrack.querySelector('.product-item');
-      if (!firstItem) return 304;
-      // Ancho del item + gap (24px)
-      return firstItem.offsetWidth + 24;
+  if (prodWindow && prodBtnPrev && prodBtnNext) {
+    const getScrollDistance = () => {
+      const item = prodWindow.querySelector('.product-item');
+      return item ? (item.offsetWidth + 24) : 294;
     };
 
-    const getMaxIndex = () => {
-      const items = productsTrack.querySelectorAll('.product-item');
-      const windowWidth = productsTrack.parentElement.offsetWidth;
-      const totalWidth = items.length * getScrollStep();
-      const visibleItems = Math.floor(windowWidth / getScrollStep());
-      return Math.max(0, items.length - (visibleItems > 0 ? visibleItems : 1));
-    };
+    prodBtnNext.addEventListener('click', () => {
+      const distance = getScrollDistance();
+      const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
 
-    const updateProductPosition = () => {
-      const step = getScrollStep();
-      productsTrack.style.transform = `translateX(-${currentProductIndex * step}px)`;
-    };
-
-    productsNext.addEventListener('click', () => {
-      const maxIndex = getMaxIndex();
-      if (currentProductIndex < maxIndex) {
-        currentProductIndex++;
+      if (prodWindow.scrollLeft >= maxScroll - 10) {
+        prodWindow.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        currentProductIndex = 0; // Regresa al inicio
+        prodWindow.scrollBy({ left: distance, behavior: 'smooth' });
       }
-      updateProductPosition();
     });
 
-    productsPrev.addEventListener('click', () => {
-      if (currentProductIndex > 0) {
-        currentProductIndex--;
-      } else {
-        currentProductIndex = getMaxIndex(); // Va al final
-      }
-      updateProductPosition();
-    });
+    prodBtnPrev.addEventListener('click', () => {
+      const distance = getScrollDistance();
+      const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
 
-    window.addEventListener('resize', () => {
-      currentProductIndex = 0;
-      updateProductPosition();
+      if (prodWindow.scrollLeft <= 5) {
+        prodWindow.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        prodWindow.scrollBy({ left: -distance, behavior: 'smooth' });
+      }
     });
   }
 
   /* =========================================================
-     2. CARRUSEL DE INSTALACIONES (Slider con Dots y Flechas)
+     2. CARRUSEL DE INSTALACIONES (SLIDER AUTOMÁTICO)
      ========================================================= */
   const carruselTrack = document.getElementById('carruselTrack');
   const prevBtn = document.getElementById('prevBtn');
@@ -68,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let autoPlayTimer = null;
 
-    // Crear dots dinámicamente según la cantidad de imágenes
     dotsContainer.innerHTML = '';
     slides.forEach((_, i) => {
       const dot = document.createElement('span');
@@ -112,29 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     3. SLIDER ANTES Y DESPUÉS (Arrastre interactivo)
-     ========================================================= */
-  const baRange = document.getElementById('baRange');
-  const baAfterWrap = document.getElementById('baAfterWrap');
-  const baHandle = document.getElementById('baHandle');
-  const baSlider = document.getElementById('baSlider');
-
-  if (baRange && baAfterWrap && baHandle && baSlider) {
-    const syncSlider = () => {
-      const val = baRange.value;
-      baAfterWrap.style.width = `${val}%`;
-      baHandle.style.left = `${val}%`;
-      // Ajusta la imagen recortada para evitar distorsión
-      baAfterWrap.querySelector('.ba-slider__img').style.width = `${baSlider.offsetWidth}px`;
-    };
-
-    baRange.addEventListener('input', syncSlider);
-    window.addEventListener('resize', syncSlider);
-    syncSlider();
-  }
-
-  /* =========================================================
-     4. CONTROL DE MODALES (Abrir / Cerrar)
+     3. CONTROL DEL MODAL DE RESERVAS
      ========================================================= */
   const openButtons = document.querySelectorAll('[data-open-modal]');
   const closeElements = document.querySelectorAll('[data-close-modal]');
@@ -145,13 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-
-    // Si abre el modal de antes y después, recalcular medidas
-    if (modalId === 'transformModal' && baRange) {
-      setTimeout(() => {
-        baRange.dispatchEvent(new Event('input'));
-      }, 50);
-    }
   };
 
   const closeModal = (modal) => {
@@ -176,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================================================
-     5. LÓGICA DE RESERVA EN 3 PASOS & CALENDARIO
+     4. RESERVAS EN 3 PASOS & WHATSAPP
      ========================================================= */
   const bookingModal = document.getElementById('bookingModal');
   if (bookingModal) {
@@ -195,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputFecha = document.getElementById('bookingDate');
     const inputHora = document.getElementById('bookingTime');
 
-    // Horas disponibles por defecto
     const availableHours = ['09:30', '10:30', '11:30', '12:30', '14:30', '15:30', '16:30', '17:30', '18:30'];
     bookingTimes.innerHTML = '';
     availableHours.forEach((hour, i) => {
@@ -212,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
       bookingTimes.appendChild(btn);
     });
 
-    // Calendario simple actual
     const today = new Date();
     let displayMonth = today.getMonth();
     let displayYear = today.getFullYear();
@@ -282,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     6. FAQ ACORDEÓN & HEADER CON SCROLL
+     5. FAQ ACORDEÓN & HEADER SCROLL
      ========================================================= */
   const faqQuestions = document.querySelectorAll('.faq__question');
   faqQuestions.forEach(btn => {
@@ -311,17 +260,4 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.remove('is-scrolled');
     }
   });
-
-  // Animación de aparición en scroll
-  const reveals = document.querySelectorAll('.reveal-item:not(.hero .reveal-item)');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  reveals.forEach(el => observer.observe(el));
 });
