@@ -52,7 +52,6 @@ ul {
   list-style: none;
 }
 
-/* Accesibilidad: Foco visible de alto contraste */
 :focus-visible {
   outline: 3px solid var(--color-gold-light) !important;
   outline-offset: 3px !important;
@@ -77,7 +76,7 @@ ul {
 }
 
 /* =========================================================
-   BARRA DE PERSISTENCIA Y SINCRONIZACIÓN
+   BARRA DE PERSISTENCIA
    ========================================================= */
 .storage-bar {
   background-color: var(--color-bg-alt);
@@ -681,7 +680,7 @@ ul {
 .products-arrow-right { right: -22px; }
 
 /* =========================================================
-   CHECKOUT & FORMULARIO VALIDADO
+   CHECKOUT & FORMULARIO
    ========================================================= */
 .checkout-section {
   padding: 4.5rem 0;
@@ -734,7 +733,6 @@ ul {
   transition: border-color var(--transition);
 }
 
-/* Estados de validación ARIA */
 .form-group input[aria-invalid="true"] {
   border-color: var(--color-error);
 }
