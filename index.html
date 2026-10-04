@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLASH | Barbería & Tienda en Calderón, Quito</title>
-  <meta name="description" content="BLASH Barbería y Tienda Oficial en Calderón, Quito. Cortes clásicos, fades, barba, catálogo de productos y checkout seguro.">
+  <title>BLASH | Barbería en Calderón, Quito</title>
+  <meta name="description" content="BLASH - Barbería premium en Calderón, Quito. Cortes clásicos, fades, barba y productos exclusivos.">
   <meta name="theme-color" content="#0d0d0d">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="BLASH | Barbería & Tienda Oficial">
-  <meta property="og:description" content="Servicios de barbería premium y tienda online de productos de cuidado masculino.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+  
+  <!-- Ruta original corregida a la raíz -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Región anunciadora ARIA para lectores de pantalla -->
+  <!-- Notificador ARIA para lectores de pantalla -->
   <div id="aria-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
   <!-- ===================== HEADER ===================== -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="#inicio" class="logo" aria-label="BLASH Barbería - Ir al inicio">
-        BLASH <span>Store</span>
+      <a href="#inicio" class="logo" aria-label="BLASH Barbería">
+        <span class="logo__icon" aria-hidden="true">
+          <img src="assets/logo.svg" alt="" onerror="this.style.display='none'">
+        </span>
+        BLASH
       </a>
 
       <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú de navegación">
+      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </label>
 
@@ -47,317 +47,456 @@
         <button type="button" class="btn btn--primary nav__cta" data-open-modal="bookingModal">Reservar Cita</button>
       </nav>
 
-      <!-- Botón de apertura del Carrito con ARIA -->
+      <!-- Botón accesible del Carrito -->
       <button type="button" class="cart-trigger" id="openCartBtn" aria-expanded="false" aria-controls="cartDrawer" aria-label="Abrir carrito de compras">
         <span aria-hidden="true">🛒</span>
-        <span class="cart-trigger__badge" id="cartBadgeCount" aria-label="0 artículos">0</span>
+        <span class="cart-trigger__badge" id="cartBadgeCount">0</span>
       </button>
     </div>
   </header>
 
-  <!-- ===================== MAIN ===================== -->
-  <main>
-    
-    <!-- Barra de Notificación de Persistencia -->
-    <aside class="storage-bar" id="storageBar" aria-label="Estado de sincronización y almacenamiento">
-      <div class="container storage-bar__inner">
-        <span>💾 Sincronización Web Storage:</span>
-        <strong id="storageTimestamp">Cargando datos locales...</strong>
-      </div>
-    </aside>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero__overlay"></div>
+    <div class="container hero__grid">
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" id="inicio">
-      <div class="hero__overlay"></div>
-      <div class="container hero__grid">
-
-        <div class="hero__content">
-          <div class="hero__social-proof">
-            <span class="hero__rating"><strong>4.9</strong> <span class="hero__stars">★★★★★</span></span>
-            <span class="hero__divider"></span>
-            <span>+500 clientes satisfechos</span>
-            <span class="hero__divider"></span>
-            <span>Barberos certificados</span>
-          </div>
-
-          <h1 class="hero__title">El estilo que buscas, <span>en el corazón de Calderón</span></h1>
-          <p class="hero__subtitle">
-            Cortes clásicos, degradados modernos y cuidado de barba profesional en un ambiente exclusivo. Ahora con tienda en línea de productos premium.
-          </p>
-
-          <div class="hero__actions">
-            <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
-            <a href="#productos" class="btn btn--outline">Comprar Productos</a>
-          </div>
+      <div class="hero__content">
+        <div class="hero__social-proof reveal-item">
+          <span class="hero__rating"><strong>4.9</strong> <span class="hero__stars">★★★★★</span></span>
+          <span class="hero__divider"></span>
+          <span>+500 clientes satisfechos</span>
+          <span class="hero__divider"></span>
+          <span>Barberos certificados</span>
         </div>
 
-        <div class="hero__visual">
-          <div class="hero__image-main">
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&auto=format&fit=crop&q=80" alt="Sillón y estación de corte en BLASH" loading="eager">
-          </div>
-          <div class="hero__floating-card">
-            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=160&auto=format&fit=crop&q=80" alt="Corte del mes">
-            <div>
-              <span class="hero__floating-tag">Corte del mes</span>
-              <strong>Fade Texturizado</strong>
-            </div>
-          </div>
-          <div class="hero__blob" aria-hidden="true"></div>
-        </div>
+        <h1 class="hero__title reveal-item">El estilo que buscas, <span>en el corazón de Calderón</span></h1>
+        <p class="hero__subtitle reveal-item">
+          Cortes clásicos, degradados modernos y cuidado de barba profesional en un ambiente exclusivo pensado para tu comodidad e imagen.
+        </p>
 
-      </div>
-    </section>
-
-    <!-- ===================== ESTADÍSTICAS ===================== -->
-    <section class="stats">
-      <div class="container stats__grid">
-        <div class="stat">
-          <span class="stat__number">500+</span>
-          <span class="stat__label">Clientes felices</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">4.9</span>
-          <span class="stat__label">Calificación Google</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">6+</span>
-          <span class="stat__label">Años de trayectoria</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">3</span>
-          <span class="stat__label">Barberos certificados</span>
+        <div class="hero__actions reveal-item">
+          <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
+          <a href="#productos" class="btn btn--outline">Comprar Productos</a>
         </div>
       </div>
-    </section>
 
-    <!-- ===================== SERVICIOS (CUADRÍCULA 3 SOBRE 3) ===================== -->
-    <section class="services" id="servicios">
-      <div class="container">
-        <h2 class="section-title">Nuestros Servicios</h2>
-        <p class="section-subtitle">Técnicas de precisión y cuidado al detalle</p>
-
-        <div class="services__grid">
-          <article class="card">
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
-            </div>
-            <h3 class="card__title">Corte Clásico</h3>
-            <p class="card__desc">Cortes a tijera o máquina tradicional con acabado limpio y perfilado prolijo.</p>
-            <span class="card__price">$10</span>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 v14 c0 8 4 14 10 22 c6 -8 10 -14 10 -22 V6"/><path d="M14 14 h20"/></svg>
-            </div>
-            <h3 class="card__title">Arreglo de Barba</h3>
-            <p class="card__desc">Perfilado con toalla caliente, navaja desechable y bálsamo hidratante aromático.</p>
-            <span class="card__price">$8</span>
-          </article>
-
-          <article class="card card--featured">
-            <div class="card__badge">Más Popular</div>
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="12" height="26" rx="6"/><path d="M18 10 h12 M18 16 h12 M18 22 h12" stroke-width="1.6"/><path d="M24 30 v10"/><path d="M17 44 h14"/></svg>
-            </div>
-            <h3 class="card__title">Combo BLASH</h3>
-            <p class="card__desc">Corte degradado o tradicional + arreglo completo de barba con toalla y peinado.</p>
-            <span class="card__price">$16</span>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
-            </div>
-            <h3 class="card__title">Fade / Degradado</h3>
-            <p class="card__desc">Low, mid o high fade con transiciones suaves a navaja o shaver profesional.</p>
-            <span class="card__price">$12</span>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M16 28 c3 4 13 4 16 0"/><circle cx="19" cy="20" r="2" fill="currentColor"/><circle cx="29" cy="20" r="2" fill="currentColor"/></svg>
-            </div>
-            <h3 class="card__title">Limpieza Facial</h3>
-            <p class="card__desc">Exfoliación profunda, mascarilla de puntos negros y toalla tibia descongestionante.</p>
-            <span class="card__price">$10</span>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40 L36 16 M28 8 L40 20"/><path d="M8 44 l4 -4"/></svg>
-            </div>
-            <h3 class="card__title">Corte Junior</h3>
-            <p class="card__desc">Atención paciente y estilos modernos para niños y adolescentes hasta 12 años.</p>
-            <span class="card__price">$8</span>
-          </article>
+      <div class="hero__visual reveal-item">
+        <div class="hero__image-main">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&auto=format&fit=crop&q=80" alt="Barbería BLASH" loading="eager">
         </div>
-      </div>
-    </section>
-
-    <!-- ===================== PRODUCTOS (CARGADOS DINÁMICAMENTE DESDE JSON) ===================== -->
-    <section class="products-section" id="productos">
-      <div class="container">
-        <div class="products-heading">
-          <h2>Productos <span>Exclusivos</span></h2>
-          <p>Cargados asíncronamente desde archivo JSON local con persistencia</p>
-        </div>
-
-        <div class="products-carousel">
-          <button type="button" class="products-arrow products-arrow-left" id="prodBtnPrev" aria-label="Desplazar productos a la izquierda">←</button>
-
-          <div class="products-window" id="productsWindow">
-            <div class="products-track" id="productsTrack" role="region" aria-label="Catálogo interactivo de productos">
-              <!-- Los artículos se generan dinámicamente desde js/repo.js y js/view.js -->
-            </div>
-          </div>
-
-          <button type="button" class="products-arrow products-arrow-right" id="prodBtnNext" aria-label="Desplazar productos a la derecha">→</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== SOBRE NOSOTROS ===================== -->
-    <section class="about" id="nosotros">
-      <div class="container about__inner">
-        <div class="about__image">
-          <div class="about__image-frame">
-            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Barbero en BLASH Calderón">
+        <div class="hero__floating-card">
+          <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=160&auto=format&fit=crop&q=80" alt="Corte del mes">
+          <div>
+            <span class="hero__floating-tag">Corte del mes</span>
+            <strong>Fade Texturizado</strong>
           </div>
         </div>
-        <div class="about__text">
-          <h2 class="section-title section-title--left">Sobre Nosotros</h2>
-          <p>
-            <strong>BLASH</strong> nació como un espacio moderno dentro de la parroquia Calderón, diseñado para quienes valoran la puntualidad, la precisión y una atención de nivel profesional.
-          </p>
-          <p>
-            Unimos la barbería clásica con las últimas tendencias de degradados y estilismo urbano en un ambiente limpio, climatizado y con los mejores productos de cuidado masculino.
-          </p>
-          <ul class="about__list">
-            <li>✔ Barberos calificados y en constante capacitación</li>
-            <li>✔ Instrumental higienizado y esterilizado</li>
-            <li>✔ Productos profesionales con garantía de calidad</li>
-          </ul>
+        <div class="hero__blob" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ESTADÍSTICAS ===================== -->
+  <section class="stats">
+    <div class="container stats__grid">
+      <div class="stat reveal-item">
+        <span class="stat__number">500+</span>
+        <span class="stat__label">Clientes felices</span>
+      </div>
+      <div class="stat reveal-item">
+        <span class="stat__number">4.9</span>
+        <span class="stat__label">Calificación Google</span>
+      </div>
+      <div class="stat reveal-item">
+        <span class="stat__number">6+</span>
+        <span class="stat__label">Años de trayectoria</span>
+      </div>
+      <div class="stat reveal-item">
+        <span class="stat__number">3</span>
+        <span class="stat__label">Barberos certificados</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS (3 SOBRE 3) ===================== -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">Técnicas de precisión y cuidado al detalle</p>
+
+      <div class="services__grid">
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
+          </div>
+          <h3 class="card__title">Corte Clásico</h3>
+          <p class="card__desc">Cortes a tijera o máquina tradicional con acabado limpio y perfilado prolijo.</p>
+          <span class="card__price">$10</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 v14 c0 8 4 14 10 22 c6 -8 10 -14 10 -22 V6"/><path d="M14 14 h20"/></svg>
+          </div>
+          <h3 class="card__title">Arreglo de Barba</h3>
+          <p class="card__desc">Perfilado con toalla caliente, navaja desechable y bálsamo hidratante aromático.</p>
+          <span class="card__price">$8</span>
+        </article>
+
+        <article class="card card--featured">
+          <div class="card__badge">Más Popular</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="12" height="26" rx="6"/><path d="M18 10 h12 M18 16 h12 M18 22 h12" stroke-width="1.6"/><path d="M24 30 v10"/><path d="M17 44 h14"/></svg>
+          </div>
+          <h3 class="card__title">Combo BLASH</h3>
+          <p class="card__desc">Corte degradado o tradicional + arreglo completo de barba con toalla y peinado.</p>
+          <span class="card__price">$16</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
+          </div>
+          <h3 class="card__title">Fade / Degradado</h3>
+          <p class="card__desc">Low, mid o high fade con transiciones suaves a navaja o shaver profesional.</p>
+          <span class="card__price">$12</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M16 28 c3 4 13 4 16 0"/><circle cx="19" cy="20" r="2" fill="currentColor"/><circle cx="29" cy="20" r="2" fill="currentColor"/></svg>
+          </div>
+          <h3 class="card__title">Limpieza Facial</h3>
+          <p class="card__desc">Exfoliación profunda, mascarilla de puntos negros y toalla tibia descongestionante.</p>
+          <span class="card__price">$10</span>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40 L36 16 M28 8 L40 20"/><path d="M8 44 l4 -4"/></svg>
+          </div>
+          <h3 class="card__title">Corte Junior</h3>
+          <p class="card__desc">Atención paciente y estilos modernos para niños y adolescentes hasta 12 años.</p>
+          <span class="card__price">$8</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRODUCTOS (10 ARTÍCULOS REALES EN HTML) ===================== -->
+  <section class="products-section" id="productos">
+    <div class="container">
+      <div class="products-heading">
+        <h2>Productos <span>Exclusivos</span></h2>
+        <p>Lleva el cuidado y el acabado profesional a tu casa</p>
+      </div>
+
+      <div class="products-carousel">
+        <button type="button" class="products-arrow products-arrow-left" id="prodBtnPrev" aria-label="Anterior">←</button>
+
+        <div class="products-window" id="productsWindow">
+          <div class="products-track" id="productsTrack">
+
+            <article class="product-item" data-id="1" data-name="Pomada Matte Clay" data-price="14.00" data-img="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&auto=format&fit=crop&q=80" alt="Pomada Matte Clay">
+                <span class="product-tag">TOP VENTAS</span>
+              </div>
+              <div class="product-info">
+                <span class="product-type">FIJACIÓN</span>
+                <h3>Pomada Matte Clay</h3>
+                <p>Fijación alta y textura mate sin brillo. Cero residuos grasos.</p>
+                <div class="product-footer">
+                  <strong>$14.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="2" data-name="Óleo Wood & Spice" data-price="12.50" data-img="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop&q=80" alt="Óleo Wood & Spice">
+                <span class="product-tag">RECOMENDADO</span>
+              </div>
+              <div class="product-info">
+                <span class="product-type">CUIDADO BARBA</span>
+                <h3>Óleo Wood & Spice</h3>
+                <p>Hidrata la piel, reduce la comezón y da suavidad al vello facial.</p>
+                <div class="product-footer">
+                  <strong>$12.50</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="3" data-name="Polvo Texturizador" data-price="11.00" data-img="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80" alt="Polvo Texturizador">
+              </div>
+              <div class="product-info">
+                <span class="product-type">VOLUMEN</span>
+                <h3>Polvo Texturizador</h3>
+                <p>Volumen instantáneo en raíz para estilos modernos y crop fade.</p>
+                <div class="product-footer">
+                  <strong>$11.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="4" data-name="After Shave Mint" data-price="9.50" data-img="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=600&auto=format&fit=crop&q=80" alt="After Shave Mint">
+              </div>
+              <div class="product-info">
+                <span class="product-type">POST AFEITADO</span>
+                <h3>After Shave Mint</h3>
+                <p>Calma el ardor de la navaja, desinfecta y refresca la piel.</p>
+                <div class="product-footer">
+                  <strong>$9.50</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="5" data-name="Shampoo Purificante" data-price="13.00" data-img="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&auto=format&fit=crop&q=80" alt="Shampoo Purificante">
+              </div>
+              <div class="product-info">
+                <span class="product-type">CUIDADO CAPILAR</span>
+                <h3>Shampoo Purificante</h3>
+                <p>Limpieza profunda para cuero cabelludo graso o con caspa.</p>
+                <div class="product-footer">
+                  <strong>$13.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="6" data-name="Aqua Wax Pomade" data-price="12.00" data-img="https://images.unsplash.com/photo-1512290900672-1f486b72a0c6?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1512290900672-1f486b72a0c6?w=600&auto=format&fit=crop&q=80" alt="Aqua Wax Pomade">
+              </div>
+              <div class="product-info">
+                <span class="product-type">FIJACIÓN</span>
+                <h3>Aqua Wax Pomade</h3>
+                <p>Brillo medio elegante de fácil lavado con agua sin dañar el cabello.</p>
+                <div class="product-footer">
+                  <strong>$12.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="7" data-name="Bálsamo Karité" data-price="11.50" data-img="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=600&auto=format&fit=crop&q=80" alt="Bálsamo Karité">
+              </div>
+              <div class="product-info">
+                <span class="product-type">CUIDADO BARBA</span>
+                <h3>Bálsamo Karité</h3>
+                <p>Fijación suave para domar barbas rebeldes y aportar nutrición.</p>
+                <div class="product-footer">
+                  <strong>$11.50</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="8" data-name="Tónico Revitalizante" data-price="10.00" data-img="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80" alt="Tónico Revitalizante">
+              </div>
+              <div class="product-info">
+                <span class="product-type">TRATAMIENTO</span>
+                <h3>Tónico Revitalizante</h3>
+                <p>Estimula el folículo piloso y refresca con extractos herbales.</p>
+                <div class="product-footer">
+                  <strong>$10.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="9" data-name="Gel Precisión Clear" data-price="8.50" data-img="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80" alt="Gel Precisión Clear">
+              </div>
+              <div class="product-info">
+                <span class="product-type">AFEITADO</span>
+                <h3>Gel Precisión Clear</h3>
+                <p>Fórmula 100% transparente para un perfilado milimétrico.</p>
+                <div class="product-footer">
+                  <strong>$8.50</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-item" data-id="10" data-name="Cepillo Cerdas Jabalí" data-price="9.00" data-img="https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80">
+              <div class="product-photo">
+                <img src="https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80" alt="Cepillo Cerdas Jabalí">
+              </div>
+              <div class="product-info">
+                <span class="product-type">HERRAMIENTAS</span>
+                <h3>Cepillo Cerdas Jabalí</h3>
+                <p>Madera maciza para cepillar y dar brillo uniforme a la barba.</p>
+                <div class="product-footer">
+                  <strong>$9.00</strong>
+                  <button type="button" class="btn-add-cart">Pedir 🛒</button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <button type="button" class="products-arrow products-arrow-right" id="prodBtnNext" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE NOSOTROS ===================== -->
+  <section class="about" id="nosotros">
+    <div class="container about__inner">
+      <div class="about__image">
+        <div class="about__image-frame">
+          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Barbero en BLASH">
         </div>
       </div>
-    </section>
-
-    <!-- ===================== INSTALACIONES ===================== -->
-    <section class="carrusel-section" id="instalaciones">
-      <div class="container">
-        <h2 class="section-title">Conoce <span>Nuestras Instalaciones</span></h2>
-        <p class="section-subtitle">Espacios cómodos pensados para tu relajación</p>
-
-        <div class="carrusel-wrapper">
-          <div class="carrusel-track" id="carruselTrack">
-            <div class="carrusel-slide">
-              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80" alt="Ambiente Exclusivo BLASH">
-              <div class="slide-caption">Ambiente Exclusivo & Estilo BLASH</div>
-            </div>
-            <div class="carrusel-slide">
-              <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Estaciones de Corte de Alta Precisión">
-              <div class="slide-caption">Estaciones de Corte de Alta Precisión</div>
-            </div>
-          </div>
-
-          <button type="button" class="carrusel-btn prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
-          <button type="button" class="carrusel-btn next" id="nextBtn" aria-label="Foto siguiente">&#10095;</button>
-          <div class="carrusel-dots" id="carruselDots"></div>
-        </div>
+      <div class="about__text">
+        <h2 class="section-title section-title--left">Sobre Nosotros</h2>
+        <p>
+          <strong>BLASH</strong> nació como un espacio moderno dentro de la parroquia Calderón, diseñado para quienes valoran la puntualidad, la precisión y una atención de nivel profesional.
+        </p>
+        <p>
+          Unimos la barbería clásica con las últimas tendencias de degradados y estilismo urbano en un ambiente limpio, climatizado y con los mejores productos de cuidado masculino.
+        </p>
+        <ul class="about__list">
+          <li>✔ Barberos calificados y en constante capacitación</li>
+          <li>✔ Instrumental higienizado y esterilizado</li>
+          <li>✔ Productos profesionales con garantía de calidad</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== CHECKOUT VALIDADO CON REGEX ===================== -->
-    <section class="checkout-section" id="checkout">
-      <div class="container">
-        <div class="checkout-heading">
-          <h2 class="section-title">Finalizar <span>Compra</span></h2>
-          <p class="section-subtitle">Validación con Expresiones Regulares y almacenamiento seguro</p>
+  <!-- ===================== INSTALACIONES ===================== -->
+  <section class="carrusel-section" id="instalaciones">
+    <div class="container">
+      <h2 class="section-title">Conoce <span>Nuestras Instalaciones</span></h2>
+      <p class="section-subtitle">Espacios cómodos pensados para tu relajación</p>
+
+      <div class="carrusel-wrapper">
+        <div class="carrusel-track" id="carruselTrack">
+          <div class="carrusel-slide">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80" alt="Ambiente Exclusivo BLASH">
+            <div class="slide-caption">Ambiente Exclusivo & Estilo BLASH</div>
+          </div>
+          <div class="carrusel-slide">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Estaciones de Corte de Alta Precisión">
+            <div class="slide-caption">Estaciones de Corte de Alta Precisión</div>
+          </div>
         </div>
 
-        <form class="checkout-form" id="checkoutForm" novalidate aria-label="Formulario de confirmación de pedido">
-          <div class="form-grid">
-            
-            <div class="form-group">
-              <label for="clienteNombre">Nombre y Apellido <span aria-hidden="true">*</span></label>
-              <input type="text" id="clienteNombre" name="nombre" placeholder="Ej. Bryan Ariel Proaño" required aria-required="true" aria-describedby="errorNombre">
-              <span class="form-error" id="errorNombre" role="alert" aria-live="assertive"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="clienteEmail">Correo Electrónico <span aria-hidden="true">*</span></label>
-              <input type="email" id="clienteEmail" name="email" placeholder="Ej. usuario@correo.com" required aria-required="true" aria-describedby="errorEmail">
-              <span class="form-error" id="errorEmail" role="alert" aria-live="assertive"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="clienteTelefono">Teléfono Celular Ecuador (10 dígitos) <span aria-hidden="true">*</span></label>
-              <input type="tel" id="clienteTelefono" name="telefono" placeholder="Ej. 0991234567" required aria-required="true" aria-describedby="errorTelefono">
-              <span class="form-error" id="errorTelefono" role="alert" aria-live="assertive"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="clienteCedula">Cédula de Identidad (10 dígitos) <span aria-hidden="true">*</span></label>
-              <input type="text" id="clienteCedula" name="cedula" placeholder="Ej. 1723456789" required aria-required="true" aria-describedby="errorCedula">
-              <span class="form-error" id="errorCedula" role="alert" aria-live="assertive"></span>
-            </div>
-
-            <div class="form-group form-group--full">
-              <label for="clienteDireccion">Dirección de Entrega <span aria-hidden="true">*</span></label>
-              <input type="text" id="clienteDireccion" name="direccion" placeholder="Ej. Av. Geovanny Calles y Carapungo, Calderón" required aria-required="true" aria-describedby="errorDireccion">
-              <span class="form-error" id="errorDireccion" role="alert" aria-live="assertive"></span>
-            </div>
-
-          </div>
-
-          <button type="submit" class="btn btn--gold btn--full" id="submitOrderBtn">
-            Confirmar Orden y Registrar en IndexedDB
-          </button>
-        </form>
+        <button type="button" class="carrusel-btn prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
+        <button type="button" class="carrusel-btn next" id="nextBtn" aria-label="Foto siguiente">&#10095;</button>
+        <div class="carrusel-dots" id="carruselDots"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== UBICACIÓN ===================== -->
-    <section class="location" id="ubicacion">
-      <div class="container location__inner">
-        <div class="location__info">
-          <h2 class="section-title section-title--left">Ubicación y Horarios</h2>
-
-          <div class="info-item">
-            <span class="info-item__icon">📍</span>
-            <div>
-              <h4>Dirección</h4>
-              <p>Av. Geovanny Calles y Carapungo, Calderón, Quito - Ecuador</p>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <span class="info-item__icon">🕒</span>
-            <div>
-              <h4>Horario de Atención</h4>
-              <p>Lunes a Sábado: 9:00 - 20:00</p>
-            </div>
-          </div>
-
-          <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
-            Escríbenos por WhatsApp
-          </a>
-        </div>
-
-        <div class="location__map">
-          <iframe title="Ubicación BLASH" src="https://www.google.com/maps?q=Calder%C3%B3n%2C%20Quito&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+  <!-- ===================== CHECKOUT VALIDADO CON REGEX ===================== -->
+  <section class="checkout-section" id="checkout">
+    <div class="container">
+      <div class="checkout-heading">
+        <h2 class="section-title">Finalizar <span>Compra</span></h2>
+        <p class="section-subtitle">Valida tus datos y confirma el pedido (Registrado en IndexedDB y WebStorage)</p>
       </div>
-    </section>
 
-  </main>
+      <form class="checkout-form" id="checkoutForm" novalidate aria-label="Formulario de finalización de compra">
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label for="clienteNombre">Nombre y Apellido <span aria-hidden="true">*</span></label>
+            <input type="text" id="clienteNombre" name="nombre" placeholder="Ej. Bryan Ariel Proaño" required aria-required="true" aria-describedby="errorNombre">
+            <span class="form-error" id="errorNombre" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="clienteEmail">Correo Electrónico <span aria-hidden="true">*</span></label>
+            <input type="email" id="clienteEmail" name="email" placeholder="Ej. usuario@correo.com" required aria-required="true" aria-describedby="errorEmail">
+            <span class="form-error" id="errorEmail" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="clienteTelefono">Teléfono Celular Ecuador (10 dígitos) <span aria-hidden="true">*</span></label>
+            <input type="tel" id="clienteTelefono" name="telefono" placeholder="Ej. 0991234567" required aria-required="true" aria-describedby="errorTelefono">
+            <span class="form-error" id="errorTelefono" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="clienteCedula">Cédula de Identidad (10 dígitos) <span aria-hidden="true">*</span></label>
+            <input type="text" id="clienteCedula" name="cedula" placeholder="Ej. 1723456789" required aria-required="true" aria-describedby="errorCedula">
+            <span class="form-error" id="errorCedula" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="clienteDireccion">Dirección de Entrega <span aria-hidden="true">*</span></label>
+            <input type="text" id="clienteDireccion" name="direccion" placeholder="Ej. Av. Geovanny Calles y Carapungo, Calderón" required aria-required="true" aria-describedby="errorDireccion">
+            <span class="form-error" id="errorDireccion" role="alert" aria-live="assertive"></span>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn btn--gold btn--full" id="submitOrderBtn">
+          Confirmar Orden y Registrar Pedido
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== UBICACIÓN ===================== -->
+  <section class="location" id="ubicacion">
+    <div class="container location__inner">
+      <div class="location__info">
+        <h2 class="section-title section-title--left">Ubicación y Horarios</h2>
+
+        <div class="info-item">
+          <span class="info-item__icon">📍</span>
+          <div>
+            <h4>Dirección</h4>
+            <p>Av. Geovanny Calles y Carapungo, Calderón, Quito - Ecuador</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-item__icon">🕒</span>
+          <div>
+            <h4>Horario de Atención</h4>
+            <p>Lunes a Sábado: 9:00 - 20:00</p>
+          </div>
+        </div>
+
+        <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+
+      <div class="location__map">
+        <iframe title="Ubicación BLASH" src="https://www.google.com/maps?q=Calder%C3%B3n%2C%20Quito&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__col">
         <p class="footer__logo">BLASH</p>
-        <p class="footer__tagline">Barbería premium y tienda oficial en el corazón de Calderón, Quito.</p>
+        <p class="footer__tagline">Barbería premium y tienda oficial en Calderón, Quito.</p>
       </div>
 
       <div class="footer__col">
@@ -383,10 +522,10 @@
         </div>
       </div>
     </div>
-    <p class="footer__rights">&copy; 2026 BLASH Store. Todos los derechos reservados.</p>
+    <p class="footer__rights">&copy; 2026 BLASH. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ===================== PANEL LATERAL DEL CARRITO (DRAWER ACCESIBLE) ===================== -->
+  <!-- ===================== DRAWER DEL CARRITO ===================== -->
   <div class="cart-drawer-overlay" id="cartOverlay" aria-hidden="true"></div>
   <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" aria-hidden="true">
     <div class="cart-drawer__header">
@@ -395,7 +534,7 @@
     </div>
 
     <div class="cart-drawer__body" id="cartDrawerItems">
-      <!-- Se inyecta dinámicamente desde view.js -->
+      <!-- Se inyecta dinámicamente -->
     </div>
 
     <div class="cart-drawer__footer">
@@ -515,6 +654,7 @@
     </div>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <!-- Script tradicional, 100% compatible y sin bloqueos de navegador -->
+  <script src="script.js?v=9"></script>
 </body>
 </html>
