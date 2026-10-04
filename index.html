@@ -8,19 +8,19 @@
   <meta name="theme-color" content="#0d0d0d">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
-  <!-- Open Graph / redes sociales -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="BLASH | Barbería en Calderón, Quito">
   <meta property="og:description" content="Barbería premium en la parroquia Calderón, Quito. Cortes clásicos, arreglo de barba, fade y combos.">
   <meta property="og:image" content="assets/hero-main.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===================== HEADER / NAVEGACIÓN ===================== -->
+  <!-- ===================== HEADER ===================== -->
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#inicio" class="logo">
@@ -30,18 +30,16 @@
         BLASH
       </a>
 
-      <!-- Botón hamburguesa para móviles -->
       <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
       </label>
 
       <nav class="nav">
         <ul class="nav__list">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#productos">Productos</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#instalaciones">Instalaciones</a></li>
           <li><a href="#ubicacion">Ubicación</a></li>
@@ -51,13 +49,13 @@
     </div>
   </header>
 
-  <!-- ===================== HERO / PRINCIPAL ===================== -->
+  <!-- ===================== HERO ===================== -->
   <section class="hero" id="inicio">
     <div class="hero__overlay"></div>
     <div class="container hero__grid">
 
       <div class="hero__content">
-        <div class="hero__social-proof reveal-item" style="--delay:.1s">
+        <div class="hero__social-proof reveal-item">
           <span class="hero__rating"><strong>4.9</strong> <span class="hero__stars">★★★★★</span></span>
           <span class="hero__divider"></span>
           <span>+500 clientes felices</span>
@@ -65,13 +63,13 @@
           <span>Barberos certificados</span>
         </div>
 
-        <h1 class="hero__title reveal-item" style="--delay:.2s">El estilo que buscas, <span>en el corazón de Calderón</span></h1>
-        <p class="hero__subtitle reveal-item" style="--delay:.3s">
+        <h1 class="hero__title reveal-item">El estilo que buscas, <span>en el corazón de Calderón</span></h1>
+        <p class="hero__subtitle reveal-item">
           Cortes clásicos, fades modernos y arreglo de barba profesional en un ambiente pensado
           para hombres que cuidan su imagen. Bienvenido a tu nueva barbería de confianza.
         </p>
 
-        <div class="hero__actions reveal-item" style="--delay:.4s">
+        <div class="hero__actions reveal-item">
           <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
           <button type="button" class="btn btn--outline" data-open-modal="transformModal">
             <span class="btn__play">▶</span> Ver Transformaciones
@@ -79,12 +77,12 @@
         </div>
       </div>
 
-      <div class="hero__visual reveal-item" style="--delay:.5s">
+      <div class="hero__visual reveal-item">
         <div class="hero__image-main">
           <img src="assets/hero-main.svg" alt="Ilustración de barbería BLASH" loading="eager">
         </div>
         <div class="hero__floating-card">
-          <img src="assets/cut-of-month.svg" alt="Corte del mes BLASH">
+          <img src="assets/cut-of-month.svg" alt="Corte del mes">
           <div>
             <span class="hero__floating-tag">Corte del mes</span>
             <strong>Fade Texturizado</strong>
@@ -99,19 +97,19 @@
   <!-- ===================== ESTADÍSTICAS ===================== -->
   <section class="stats">
     <div class="container stats__grid">
-      <div class="stat reveal-item" style="--delay:.05s">
+      <div class="stat reveal-item">
         <span class="stat__number" data-count-to="500" data-suffix="+">0</span>
         <span class="stat__label">Clientes felices</span>
       </div>
-      <div class="stat reveal-item" style="--delay:.1s">
+      <div class="stat reveal-item">
         <span class="stat__number" data-count-to="4.9" data-decimals="1">0</span>
         <span class="stat__label">Calificación Google</span>
       </div>
-      <div class="stat reveal-item" style="--delay:.15s">
+      <div class="stat reveal-item">
         <span class="stat__number" data-count-to="6" data-suffix="+">0</span>
         <span class="stat__label">Años de experiencia</span>
       </div>
-      <div class="stat reveal-item" style="--delay:.2s">
+      <div class="stat reveal-item">
         <span class="stat__number" data-count-to="3">0</span>
         <span class="stat__label">Barberos certificados</span>
       </div>
@@ -124,8 +122,7 @@
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-subtitle">Calidad premium a precios justos</p>
 
-      <div class="galeria services__grid">
-
+      <div class="galeria">
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
@@ -162,268 +159,158 @@
           <p class="card__desc">Degradados modernos con precisión, ideales para un look actual.</p>
           <span class="card__price">$12</span>
         </article>
-
       </div>
     </div>
   </section>
 
-  <article class="card">
-          <div class="card__icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
-          </div>
-          <h3 class="card__title">Fade / Degradado</h3>
-          <p class="card__desc">Degradados modernos con precisión, ideales para un look actual.</p>
-          <span class="card__price">$12</span>
-        </article>
+  <!-- ===================== PRODUCTOS ===================== -->
+  <section class="products-section" id="productos">
+    <div class="products-heading">
+      <h2>Productos <span>Exclusivos</span></h2>
+      <p>Lleva el cuidado y el acabado profesional a tu casa</p>
+    </div>
 
+    <div class="products-carousel">
+      <button class="products-arrow products-arrow-left" id="productsPrev" aria-label="Anterior">←</button>
+
+      <div class="products-window">
+        <div class="products-track" id="productsTrack">
+
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="images/pomada-mate.jpg" alt="Pomada Mate Matte Clay">
+              <span class="product-tag">TOP VENTAS</span>
+            </div>
+            <div class="product-info">
+              <span class="product-type">PEINADO & FIJACIÓN</span>
+              <h3>Pomada Mate Matte Clay</h3>
+              <p>Fijación fuerte y acabado natural sin brillo. No deja residuos ni grasa.</p>
+              <div class="product-footer">
+                <strong>$14.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="images/aceite-barba.jpg" alt="Óleo para Barba Wood & Spice">
+              <span class="product-tag">RECOMENDADO</span>
+            </div>
+            <div class="product-info">
+              <span class="product-type">CUIDADO FACIAL</span>
+              <h3>Óleo para Barba Wood & Spice</h3>
+              <p>Hidrata la piel bajo la barba, reduce la picazón y aporta brillo sutil.</p>
+              <div class="product-footer">
+                <strong>$12.50</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="images/polvo-texturizado.jpg" alt="Polvo Texturizado Matt">
+            </div>
+            <div class="product-info">
+              <span class="product-type">VOLUMEN & TEXTURA</span>
+              <h3>Polvo Texturizado Matt</h3>
+              <p>Da volumen instantáneo en la raíz y textura para peinados con fade.</p>
+              <div class="product-footer">
+                <strong>$11.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="images/after-shave.jpg" alt="After Shave Refrescante Mint">
+            </div>
+            <div class="product-info">
+              <span class="product-type">POST AFEITADO</span>
+              <h3>After Shave Refrescante Mint</h3>
+              <p>Calma la irritación tras la navaja, desinfecta y deja sensación fresca.</p>
+              <div class="product-footer">
+                <strong>$9.50</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="images/shampoo.jpg" alt="Shampoo Profesional">
+            </div>
+            <div class="product-info">
+              <span class="product-type">CUIDADO CAPILAR</span>
+              <h3>Shampoo Profesional</h3>
+              <p>Limpieza profunda y cuidado diario para todo tipo de cabello.</p>
+              <div class="product-footer">
+                <strong>$13.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
+
+      <button class="products-arrow products-arrow-right" id="productsNext" aria-label="Siguiente">→</button>
     </div>
   </section>
-
-<section class="products-section">
-
-  <div class="products-heading">
-    <h2>Productos <span>Exclusivos</span></h2>
-    <p>Lleva el cuidado y el acabado profesional a tu casa</p>
-  </div>
-
-  <div class="products-carousel">
-
-    <button
-      class="products-arrow products-arrow-left"
-      id="productsPrev"
-      aria-label="Productos anteriores"
-    >
-      ←
-    </button>
-
-    <div class="products-window">
-
-      <div class="products-track" id="productsTrack">
-
-        <!-- PRODUCTO -->
-        <article class="product-item">
-
-          <div class="product-photo">
-            <img src="images/pomada-mate.jpg" alt="Pomada Mate Matte Clay">
-            <span class="product-tag">TOP VENTAS</span>
-          </div>
-
-          <div class="product-info">
-            <span class="product-type">PEINADO & FIJACIÓN</span>
-
-            <h3>Pomada Mate Matte Clay</h3>
-
-            <p>
-              Fijación fuerte y acabado natural sin brillo.
-              No deja residuos ni grasa.
-            </p>
-
-            <div class="product-footer">
-              <strong>$14.00</strong>
-              <button>Pedir</button>
-            </div>
-          </div>
-
-        </article>
-
-
-        <!-- PRODUCTO -->
-        <article class="product-item">
-
-          <div class="product-photo">
-            <img src="images/aceite-barba.jpg" alt="Óleo para Barba Wood & Spice">
-            <span class="product-tag">RECOMENDADO</span>
-          </div>
-
-          <div class="product-info">
-            <span class="product-type">CUIDADO FACIAL</span>
-
-            <h3>Óleo para Barba Wood & Spice</h3>
-
-            <p>
-              Hidrata la piel bajo la barba, reduce
-              la picazón y aporta brillo sutil.
-            </p>
-
-            <div class="product-footer">
-              <strong>$12.50</strong>
-              <button>Pedir</button>
-            </div>
-          </div>
-
-        </article>
-
-
-        <!-- PRODUCTO -->
-        <article class="product-item">
-
-          <div class="product-photo">
-            <img src="images/polvo-texturizado.jpg" alt="Polvo Texturizado Matt">
-          </div>
-
-          <div class="product-info">
-            <span class="product-type">VOLUMEN & TEXTURA</span>
-
-            <h3>Polvo Texturizado Matt</h3>
-
-            <p>
-              Da volumen instantáneo en la raíz y
-              textura para peinados con fade.
-            </p>
-
-            <div class="product-footer">
-              <strong>$11.00</strong>
-              <button>Pedir</button>
-            </div>
-          </div>
-
-        </article>
-
-
-        <!-- PRODUCTO -->
-        <article class="product-item">
-
-          <div class="product-photo">
-            <img src="images/after-shave.jpg" alt="After Shave Refrescante Mint">
-          </div>
-
-          <div class="product-info">
-            <span class="product-type">POST AFEITADO</span>
-
-            <h3>After Shave Refrescante Mint</h3>
-
-            <p>
-              Calma la irritación tras la navaja,
-              desinfecta y deja sensación fresca.
-            </p>
-
-            <div class="product-footer">
-              <strong>$9.50</strong>
-              <button>Pedir</button>
-            </div>
-          </div>
-
-        </article>
-
-
-        <!-- PRODUCTO -->
-        <article class="product-item">
-
-          <div class="product-photo">
-            <img src="images/shampoo.jpg" alt="Shampoo Profesional">
-          </div>
-
-          <div class="product-info">
-            <span class="product-type">CUIDADO CAPILAR</span>
-
-            <h3>Shampoo Profesional</h3>
-
-            <p>
-              Limpieza profunda y cuidado diario
-              para todo tipo de cabello.
-            </p>
-
-            <div class="product-footer">
-              <strong>$13.00</strong>
-              <button>Pedir</button>
-            </div>
-          </div>
-
-        </article>
-
-      </div>
-
-    </div>
-
-    <button
-      class="products-arrow products-arrow-right"
-      id="productsNext"
-      aria-label="Siguientes productos"
-    >
-      →
-    </button>
-
-  </div>
-
-</section>
-
-
-  
 
   <!-- ===================== SOBRE NOSOTROS ===================== -->
   <section class="about" id="nosotros">
     <div class="container about__inner">
       <div class="about__image">
         <div class="about__image-frame">
-          <img src="assets/gallery-6.svg" alt="Ambiente de la barbería BLASH">
+          <img src="assets/gallery-6.svg" alt="Ambiente BLASH">
         </div>
       </div>
       <div class="about__text">
         <h2 class="section-title section-title--left">Sobre Nosotros</h2>
         <p>
-          <strong>BLASH</strong> nace como un espacio nuevo y fresco dentro de la
-          parroquia Calderón, creado para hombres que valoran el detalle y el buen cuidado de su
-          imagen personal.
+          <strong>BLASH</strong> nace como un espacio nuevo y fresco en Calderón, pensado para el hombre moderno que valora el detalle y un estilo impecable.
         </p>
         <p>
-          Combinamos técnicas clásicas de barbería con tendencias modernas, en un ambiente cómodo,
-          limpio y con la mejor atención. Nuestro objetivo es que cada cliente salga con la
-          confianza de lucir su mejor versión.
+          Combinamos técnicas clásicas de barbería con las últimas tendencias de degradados y perfilados, garantizando comodidad, higiene y atención de primera clase.
         </p>
         <ul class="about__list">
-          <li>✔ Barberos profesionales y capacitados</li>
-          <li>✔ Productos de alta calidad</li>
-          <li>✔ Ambiente moderno y acogedor</li>
+          <li>✔ Barberos calificados y actualizados</li>
+          <li>✔ Productos y herramientas profesionales</li>
+          <li>✔ Ambiente climatizado y confortable</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CARRUSEL DE INSTALACIONES ===================== -->
+  <!-- ===================== INSTALACIONES ===================== -->
   <section class="carrusel-section" id="instalaciones">
     <div class="container">
       <h2 class="section-title reveal-item">Conoce <span>Nuestras Instalaciones</span></h2>
-      <p class="section-subtitle reveal-item" style="--delay:.1s">Un espacio diseñado para tu confort y estilo</p>
+      <p class="section-subtitle reveal-item">Un espacio diseñado para tu confort y estilo</p>
 
       <div class="carrusel-wrapper">
         <div class="carrusel-track" id="carruselTrack">
-          <!-- Slide 1: IMAGEN1 -->
           <div class="carrusel-slide">
             <img src="assets/IMAGEN1.jpg" alt="Instalaciones BLASH 1" loading="lazy">
             <div class="slide-caption">Ambiente Exclusivo & Estilo BLASH</div>
           </div>
-
-          <!-- Slide 2: IMAGEN2 -->
           <div class="carrusel-slide">
             <img src="assets/IMAGEN2.jpg" alt="Instalaciones BLASH 2" loading="lazy">
             <div class="slide-caption">Estaciones de Corte de Alta Precisión</div>
           </div>
-
-          <!-- Slide 3: IMAGEN1 (repetición continua) -->
-          <div class="carrusel-slide">
-            <img src="assets/IMAGEN1.jpg" alt="Instalaciones BLASH 3" loading="lazy">
-            <div class="slide-caption">Comodidad y Atención Profesional</div>
-          </div>
-
-          <!-- Slide 4: IMAGEN2 (repetición continua) -->
-          <div class="carrusel-slide">
-            <img src="assets/IMAGEN2.jpg" alt="Instalaciones BLASH 4" loading="lazy">
-            <div class="slide-caption">Cuidado y Perfilado al Detalle</div>
-          </div>
         </div>
 
-        <!-- Botones de flechas -->
         <button class="carrusel-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
         <button class="carrusel-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
-
-        <!-- Indicadores (puntos) -->
         <div class="carrusel-dots" id="carruselDots"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== UBICACIÓN Y HORARIOS ===================== -->
+  <!-- ===================== UBICACIÓN ===================== -->
   <section class="location" id="ubicacion">
     <div class="container location__inner">
       <div class="location__info">
@@ -445,73 +332,61 @@
           </div>
         </div>
 
-        <a
-          href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH"
-          class="btn btn--whatsapp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
           Escríbenos por WhatsApp
         </a>
       </div>
 
       <div class="location__map">
-        <iframe
-          title="Ubicación BLASH"
-          src="https://www.google.com/maps?q=Calder%C3%B3n%2C%20Quito&output=embed"
-          allowfullscreen=""
-          loading="lazy"
-          tabindex="-1"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+        <iframe title="Ubicación BLASH" src="https://www.google.com/maps?q=Calder%C3%B3n%2C%20Quito&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PREGUNTAS FRECUENTES ===================== -->
+  <!-- ===================== FAQ ===================== -->
   <section class="faq">
     <div class="container">
       <h2 class="section-title reveal-item">Preguntas <span>Frecuentes</span></h2>
-      <p class="section-subtitle reveal-item" style="--delay:.1s">Resolvemos tus dudas antes de tu visita</p>
+      <p class="section-subtitle reveal-item">Resolvemos tus dudas antes de tu visita</p>
 
       <div class="faq__list">
-        <div class="faq__item reveal-item" style="--delay:.05s">
+        <div class="faq__item reveal-item">
           <button type="button" class="faq__question">
             ¿Necesito reservar cita con anticipación?
             <span class="faq__icon">+</span>
           </button>
           <div class="faq__answer">
-            <p>No es obligatorio, pero te recomendamos agendar por WhatsApp o desde el botón "Agendar Cita" para asegurar tu horario preferido, especialmente los fines de semana.</p>
+            <p>No es obligatorio, pero sí muy recomendable agendar desde el botón "Agendar Cita" para evitar esperas en horas pico.</p>
           </div>
         </div>
 
-        <div class="faq__item reveal-item" style="--delay:.1s">
+        <div class="faq__item reveal-item">
           <button type="button" class="faq__question">
             ¿Puedo elegir un barbero específico?
             <span class="faq__icon">+</span>
           </button>
           <div class="faq__answer">
-            <p>Sí. En el paso 2 de la reserva puedes elegir a Jonathan, Steven o dejar que te atienda el primer barbero disponible.</p>
+            <p>Sí, en el paso 2 de la reserva puedes elegir el profesional de tu preferencia.</p>
           </div>
         </div>
 
-        <div class="faq__item reveal-item" style="--delay:.15s">
+        <div class="faq__item reveal-item">
           <button type="button" class="faq__question">
             ¿Qué formas de pago aceptan?
             <span class="faq__icon">+</span>
           </button>
           <div class="faq__answer">
-            <p>Aceptamos efectivo y transferencia. Pronto habilitaremos pago con tarjeta directamente en el local.</p>
+            <p>Aceptamos efectivo, transferencias bancarias directas y Deuna.</p>
           </div>
         </div>
 
-        <div class="faq__item reveal-item" style="--delay:.2s">
+        <div class="faq__item reveal-item">
           <button type="button" class="faq__question">
             ¿Cuánto dura un corte o combo?
             <span class="faq__icon">+</span>
           </button>
           <div class="faq__answer">
-            <p>Un corte clásico toma alrededor de 30 minutos y el Combo Completo (corte + barba) alrededor de 50 minutos.</p>
+            <p>Un corte estándar dura aproximadamente 35 minutos y el combo completo (corte + barba) alrededor de 55 minutos.</p>
           </div>
         </div>
       </div>
@@ -527,10 +402,11 @@
       </div>
 
       <div class="footer__col">
-        <h4>Enlaces</h4>
+        <h4>Enlaces Rápidos</h4>
         <ul class="footer__links">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#productos">Productos</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#instalaciones">Instalaciones</a></li>
           <li><a href="#ubicacion">Ubicación</a></li>
@@ -552,11 +428,10 @@
         </div>
       </div>
     </div>
-
     <p class="footer__rights">&copy; 2026 BLASH. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ===================== MODAL: RESERVA EN 3 PASOS ===================== -->
+  <!-- ===================== MODAL DE RESERVA ===================== -->
   <div class="modal" id="bookingModal" aria-hidden="true">
     <div class="modal__overlay" data-close-modal></div>
     <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
@@ -614,21 +489,21 @@
         <div class="modal__panel" data-panel="3">
           <p class="modal__hint">Elige fecha y hora</p>
           <div class="booking-picker">
-            <section class="booking-time-picker" aria-labelledby="timePickerTitle">
-              <h4 id="timePickerTitle">Selecciona una hora</h4>
-              <div class="booking-times" id="bookingTimes" role="group" aria-label="Horas disponibles"></div>
+            <section class="booking-time-picker">
+              <h4>Selecciona una hora</h4>
+              <div class="booking-times" id="bookingTimes" role="group"></div>
             </section>
 
-            <section class="booking-calendar" aria-labelledby="calendarTitle">
+            <section class="booking-calendar">
               <div class="calendar-toolbar">
-                <button type="button" class="calendar-nav" id="monthPrev" aria-label="Mes anterior">‹</button>
-                <h4 id="calendarTitle">Selecciona fecha</h4>
-                <button type="button" class="calendar-nav" id="monthNext" aria-label="Mes siguiente">›</button>
+                <button type="button" class="calendar-nav" id="monthPrev">‹</button>
+                <h4 id="calendarTitle">Fecha</h4>
+                <button type="button" class="calendar-nav" id="monthNext">›</button>
               </div>
               <div class="calendar-weekdays" aria-hidden="true">
                 <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
               </div>
-              <div class="calendar-days" id="calendarDays" role="grid" aria-label="Días disponibles"></div>
+              <div class="calendar-days" id="calendarDays" role="grid"></div>
               <p class="calendar-zone">Zona horaria: <strong>America/Guayaquil</strong></p>
             </section>
           </div>
@@ -640,51 +515,42 @@
       <div class="modal__nav">
         <button type="button" class="btn btn--outline" id="modalPrev" disabled>Atrás</button>
         <button type="button" class="btn btn--gold" id="modalNext">Siguiente</button>
-        <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar cita por WhatsApp</button>
+        <button type="submit" form="bookingForm" class="btn btn--whatsapp" id="modalSubmit" hidden>Confirmar por WhatsApp</button>
       </div>
 
-      <div class="booking-confirmation" id="bookingConfirmation" role="status" aria-live="polite" hidden>
+      <div class="booking-confirmation" id="bookingConfirmation" hidden>
         <span class="booking-confirmation__icon" aria-hidden="true">✓</span>
-        <h4>Cita confirmada</h4>
-        <p>Tu reserva quedó registrada en este dispositivo. Envía el mensaje de WhatsApp para que BLASH confirme tu horario.</p>
+        <h4>Cita registrada</h4>
+        <p>Envía el mensaje de WhatsApp para que BLASH asegure tu espacio en agenda.</p>
         <div class="booking-confirmation__details" id="bookingConfirmationDetails"></div>
         <button type="button" class="btn btn--gold" id="newBooking">Hacer otra reserva</button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== MODAL: ANTES Y DESPUÉS ===================== -->
+  <!-- ===================== MODAL DE TRANSFORMACIONES ===================== -->
   <div class="modal" id="transformModal" aria-hidden="true">
     <div class="modal__overlay" data-close-modal></div>
-    <div class="modal__box modal__box--wide" role="dialog" aria-modal="true" aria-labelledby="transformTitle">
+    <div class="modal__box modal__box--wide" role="dialog" aria-modal="true">
       <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
-
-      <h3 id="transformTitle">Antes <span>y Después</span></h3>
-      <p class="modal__hint">Desliza el control para ver la transformación</p>
+      <h3>Antes <span>y Después</span></h3>
+      <p class="modal__hint">Desliza la barra para ver el cambio de look</p>
 
       <div class="ba-slider" id="baSlider">
-        <img class="ba-slider__img" src="assets/before.svg" alt="Antes del corte">
+        <img class="ba-slider__img" src="assets/IMAGEN1.jpg" alt="Antes del corte">
         <div class="ba-slider__after-wrap" id="baAfterWrap">
-          <img class="ba-slider__img" src="assets/after.svg" alt="Después del corte">
+          <img class="ba-slider__img" src="assets/IMAGEN2.jpg" alt="Después del corte">
         </div>
-
         <span class="ba-slider__label ba-slider__label--before">Antes</span>
         <span class="ba-slider__label ba-slider__label--after">Después</span>
-
         <div class="ba-slider__handle" id="baHandle">↔</div>
-        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Deslizador antes y después">
+        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Deslizador comparativo">
       </div>
     </div>
   </div>
 
-  <!-- ===================== BOTÓN FLOTANTE DE WHATSAPP ===================== -->
-  <a
-    href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH"
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Escríbenos por WhatsApp"
-  >
+  <!-- Botón WhatsApp Flotante -->
+  <a href="https://wa.me/593999999999?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20BLASH" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
   </a>
 
