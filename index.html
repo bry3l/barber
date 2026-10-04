@@ -75,13 +75,30 @@
           Cortes clásicos, degradados modernos y cuidado de barba profesional en un ambiente exclusivo pensado para tu comodidad e imagen.
         </p>
 
-        <div class="hero__actions reveal-item">
-          <button type="button" class="btn btn--gold" data-open-modal="bookingModal">Agendar Cita</button>
-          <button type="button" class="btn btn--outline" data-open-modal="transformModal">
-            <span class="btn__play">▶</span> Ver Transformaciones
-          </button>
+       <!-- ===================== MODAL: ANTES Y DESPUÉS REAL ===================== -->
+  <div class="modal" id="transformModal" aria-hidden="true">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__box modal__box--wide" role="dialog" aria-modal="true">
+      <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">&times;</button>
+      <h3>Transformación <span>Real</span></h3>
+      <p class="modal__hint">Desliza el control de izquierda a derecha</p>
+
+      <div class="ba-slider" id="baSlider">
+        <!-- ANTES: Cabello largo / desordenado -->
+        <img class="ba-slider__img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=900&auto=format&fit=crop&q=80" alt="Antes del corte: cabello largo">
+        
+        <!-- DESPUÉS: Corte fade limpio y barba perfilada -->
+        <div class="ba-slider__after-wrap" id="baAfterWrap">
+          <img class="ba-slider__img" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=900&auto=format&fit=crop&q=80" alt="Después del corte: fade profesional">
         </div>
+
+        <span class="ba-slider__label ba-slider__label--before">Antes</span>
+        <span class="ba-slider__label ba-slider__label--after">Después</span>
+        <div class="ba-slider__handle" id="baHandle">↔</div>
+        <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Control deslizante">
       </div>
+    </div>
+  </div>
 
       <div class="hero__visual reveal-item">
         <div class="hero__image-main">
