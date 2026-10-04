@@ -49,7 +49,7 @@
     </div>
   </header>
 
-  <!-- ===================== HERO ===================== -->
+<!-- ===================== HERO (PORTADA BARBERÍA) ===================== -->
   <section class="hero" id="inicio">
     <div class="hero__overlay"></div>
     <div class="container hero__grid">
@@ -79,10 +79,11 @@
 
       <div class="hero__visual reveal-item">
         <div class="hero__image-main">
-          <img src="assets/hero-main.svg" alt="Ilustración de barbería BLASH" loading="eager">
+          <!-- Portada realista de barbería -->
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80" alt="Sillón y ambiente de barbería BLASH" loading="eager">
         </div>
         <div class="hero__floating-card">
-          <img src="assets/cut-of-month.svg" alt="Corte del mes">
+          <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=200&auto=format&fit=crop&q=80" alt="Corte del mes">
           <div>
             <span class="hero__floating-tag">Corte del mes</span>
             <strong>Fade Texturizado</strong>
@@ -94,76 +95,78 @@
     </div>
   </section>
 
-  <!-- ===================== ESTADÍSTICAS ===================== -->
-  <section class="stats">
-    <div class="container stats__grid">
-      <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="500" data-suffix="+">0</span>
-        <span class="stat__label">Clientes felices</span>
-      </div>
-      <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="4.9" data-decimals="1">0</span>
-        <span class="stat__label">Calificación Google</span>
-      </div>
-      <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="6" data-suffix="+">0</span>
-        <span class="stat__label">Años de experiencia</span>
-      </div>
-      <div class="stat reveal-item">
-        <span class="stat__number" data-count-to="3">0</span>
-        <span class="stat__label">Barberos certificados</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SERVICIOS ===================== -->
+  <!-- ===================== 6 SERVICIOS ===================== -->
   <section class="services" id="servicios">
     <div class="container">
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-subtitle">Calidad premium a precios justos</p>
 
       <div class="galeria">
+        <!-- Servicio 1 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="34" r="5"/><path d="M18 17 L40 40"/><path d="M18 31 L40 8"/></svg>
           </div>
           <h3 class="card__title">Corte Clásico</h3>
-          <p class="card__desc">Cortes tradicionales con acabado impecable, adaptados a tu estilo.</p>
+          <p class="card__desc">Cortes a tijera o máquina tradicional con acabado limpio y adaptado a tu estilo.</p>
           <span class="card__price">$10</span>
         </article>
 
+        <!-- Servicio 2 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 v14 c0 8 4 14 10 22 c6 -8 10 -14 10 -22 V6"/><path d="M14 14 h20"/></svg>
           </div>
           <h3 class="card__title">Arreglo de Barba</h3>
-          <p class="card__desc">Perfilado y diseño de barba con navaja y productos especializados.</p>
+          <p class="card__desc">Perfilado con toalla caliente, navaja libre y bálsamo hidratante aromático.</p>
           <span class="card__price">$8</span>
         </article>
 
+        <!-- Servicio 3 -->
         <article class="card card--featured">
           <div class="card__badge">Más Popular</div>
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="12" height="26" rx="6"/><path d="M18 10 h12 M18 16 h12 M18 22 h12" stroke-width="1.6"/><path d="M24 30 v10"/><path d="M17 44 h14"/></svg>
           </div>
-          <h3 class="card__title">Combo Completo</h3>
-          <p class="card__desc">Corte + Barba en una sola sesión. La experiencia completa BLASH.</p>
+          <h3 class="card__title">Combo BLASH Completo</h3>
+          <p class="card__desc">Corte degradado o clásico + diseño de barba con vapor ozono y peinado.</p>
           <span class="card__price">$16</span>
         </article>
 
+        <!-- Servicio 4 -->
         <article class="card">
           <div class="card__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42 c-4 -8 -2 -14 4 -20 c-1 4 1 6 3 6 c-2 -6 2 -12 8 -15 c-2 5 0 8 3 10 c4 3 6 7 6 11 c0 8 -8 14 -14 14 c-5 0 -8 -3 -10 -6z"/></svg>
           </div>
           <h3 class="card__title">Fade / Degradado</h3>
-          <p class="card__desc">Degradados modernos con precisión, ideales para un look actual.</p>
+          <p class="card__desc">Low, mid o high fade con transiciones suaves a navaja o shaver profesional.</p>
           <span class="card__price">$12</span>
+        </article>
+
+        <!-- Servicio 5 (Nuevo) -->
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M16 28 c3 4 13 4 16 0"/><line x1="18" y1="18" x2="18.01" y2="18"/><line x1="30" y1="18" x2="30.01" y2="18"/></svg>
+          </div>
+          <h3 class="card__title">Limpieza Facial Express</h3>
+          <p class="card__desc">Exfoliación profunda, mascarilla de carbón activado y toalla caliente relajante.</p>
+          <span class="card__price">$10</span>
+        </article>
+
+        <!-- Servicio 6 (Nuevo) -->
+        <article class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40 L36 16 M28 8 L40 20"/><path d="M8 44 l4 -4"/></svg>
+          </div>
+          <h3 class="card__title">Corte Infantil / Junior</h3>
+          <p class="card__desc">Cortes con paciencia, cuidado y estilo moderno para niños y adolescentes.</p>
+          <span class="card__price">$8</span>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PRODUCTOS ===================== -->
+  <!-- ===================== 10 PRODUCTOS EXCLUSIVOS ===================== -->
   <section class="products-section" id="productos">
     <div class="products-heading">
       <h2>Productos <span>Exclusivos</span></h2>
@@ -176,15 +179,16 @@
       <div class="products-window">
         <div class="products-track" id="productsTrack">
 
+          <!-- 1 -->
           <article class="product-item">
             <div class="product-photo">
-              <img src="images/pomada-mate.jpg" alt="Pomada Mate Matte Clay">
+              <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&auto=format&fit=crop&q=80" alt="Pomada Mate Matte Clay">
               <span class="product-tag">TOP VENTAS</span>
             </div>
             <div class="product-info">
-              <span class="product-type">PEINADO & FIJACIÓN</span>
+              <span class="product-type">FIJACIÓN</span>
               <h3>Pomada Mate Matte Clay</h3>
-              <p>Fijación fuerte y acabado natural sin brillo. No deja residuos ni grasa.</p>
+              <p>Fijación alta y textura mate sin dejar residuos grasos.</p>
               <div class="product-footer">
                 <strong>$14.00</strong>
                 <button type="button">Pedir</button>
@@ -192,15 +196,16 @@
             </div>
           </article>
 
+          <!-- 2 -->
           <article class="product-item">
             <div class="product-photo">
-              <img src="images/aceite-barba.jpg" alt="Óleo para Barba Wood & Spice">
+              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop&q=80" alt="Óleo para Barba Wood & Spice">
               <span class="product-tag">RECOMENDADO</span>
             </div>
             <div class="product-info">
-              <span class="product-type">CUIDADO FACIAL</span>
-              <h3>Óleo para Barba Wood & Spice</h3>
-              <p>Hidrata la piel bajo la barba, reduce la picazón y aporta brillo sutil.</p>
+              <span class="product-type">BARBA</span>
+              <h3>Óleo para Barba Wood</h3>
+              <p>Hidrata la piel, suaviza el vello y deja aroma amaderado.</p>
               <div class="product-footer">
                 <strong>$12.50</strong>
                 <button type="button">Pedir</button>
@@ -208,14 +213,15 @@
             </div>
           </article>
 
+          <!-- 3 -->
           <article class="product-item">
             <div class="product-photo">
-              <img src="images/polvo-texturizado.jpg" alt="Polvo Texturizado Matt">
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80" alt="Polvo Texturizador Voluminizador">
             </div>
             <div class="product-info">
-              <span class="product-type">VOLUMEN & TEXTURA</span>
-              <h3>Polvo Texturizado Matt</h3>
-              <p>Da volumen instantáneo en la raíz y textura para peinados con fade.</p>
+              <span class="product-type">VOLUMEN</span>
+              <h3>Polvo Texturizador</h3>
+              <p>Volumen instantáneo en raíz para peinados con fade y crops.</p>
               <div class="product-footer">
                 <strong>$11.00</strong>
                 <button type="button">Pedir</button>
@@ -223,14 +229,15 @@
             </div>
           </article>
 
+          <!-- 4 -->
           <article class="product-item">
             <div class="product-photo">
-              <img src="images/after-shave.jpg" alt="After Shave Refrescante Mint">
+              <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=600&auto=format&fit=crop&q=80" alt="After Shave Fresh Mint">
             </div>
             <div class="product-info">
               <span class="product-type">POST AFEITADO</span>
-              <h3>After Shave Refrescante Mint</h3>
-              <p>Calma la irritación tras la navaja, desinfecta y deja sensación fresca.</p>
+              <h3>After Shave Mint</h3>
+              <p>Alivia irritaciones, cierra poros y refresca la piel al instante.</p>
               <div class="product-footer">
                 <strong>$9.50</strong>
                 <button type="button">Pedir</button>
@@ -238,16 +245,97 @@
             </div>
           </article>
 
+          <!-- 5 -->
           <article class="product-item">
             <div class="product-photo">
-              <img src="images/shampoo.jpg" alt="Shampoo Profesional">
+              <img src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&auto=format&fit=crop&q=80" alt="Shampoo Anticaspa Profesional">
             </div>
             <div class="product-info">
-              <span class="product-type">CUIDADO CAPILAR</span>
-              <h3>Shampoo Profesional</h3>
-              <p>Limpieza profunda y cuidado diario para todo tipo de cabello.</p>
+              <span class="product-type">CABELLO</span>
+              <h3>Shampoo Purificante</h3>
+              <p>Limpieza profunda del cuero cabelludo con mentol revitalizante.</p>
               <div class="product-footer">
                 <strong>$13.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="https://images.unsplash.com/photo-1512290900672-1f486b72a0c6?w=600&auto=format&fit=crop&q=80" alt="Cera Fijadora Brillante">
+            </div>
+            <div class="product-info">
+              <span class="product-type">FIJACIÓN</span>
+              <h3>Cera Aqua Pomade</h3>
+              <p>Brillo medio y fijación flexible que se retira fácilmente con agua.</p>
+              <div class="product-footer">
+                <strong>$12.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=600&auto=format&fit=crop&q=80" alt="Bálsamo Moldeador para Barba">
+            </div>
+            <div class="product-info">
+              <span class="product-type">BARBA</span>
+              <h3>Bálsamo Moldeador</h3>
+              <p>Controla pelos rebeldes y nutre con manteca de karité natural.</p>
+              <div class="product-footer">
+                <strong>$11.50</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80" alt="Tónico Capilar Refrescante">
+            </div>
+            <div class="product-info">
+              <span class="product-type">TRATAMIENTO</span>
+              <h3>Tónico Hair & Scalp</h3>
+              <p>Estimula la raíz capilar y facilita el desenredado antes del secador.</p>
+              <div class="product-footer">
+                <strong>$10.00</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9 -->
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80" alt="Gel de Afeitar Transparente">
+            </div>
+            <div class="product-info">
+              <span class="product-type">AFEITADO</span>
+              <h3>Gel Precisión Shave</h3>
+              <p>Fórmula transparente para perfilar líneas de barba con total visibilidad.</p>
+              <div class="product-footer">
+                <strong>$8.50</strong>
+                <button type="button">Pedir</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10 -->
+          <article class="product-item">
+            <div class="product-photo">
+              <img src="https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80" alt="Cepillo de Barba en Madera y Cerda Natural">
+            </div>
+            <div class="product-info">
+              <span class="product-type">ACCESORIOS</span>
+              <h3>Cepillo Barbero Cerdas</h3>
+              <p>Madera tratada y cerdas suaves para ordenar y distribuir aceites.</p>
+              <div class="product-footer">
+                <strong>$9.00</strong>
                 <button type="button">Pedir</button>
               </div>
             </div>
@@ -257,6 +345,32 @@
       </div>
 
       <button class="products-arrow products-arrow-right" id="productsNext" aria-label="Siguiente">→</button>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE NOSOTROS (CON FOTO REAL) ===================== -->
+  <section class="about" id="nosotros">
+    <div class="container about__inner">
+      <div class="about__image">
+        <div class="about__image-frame">
+          <!-- Fotografía real y profesional de barbería -->
+          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop&q=80" alt="Equipo y estación de corte en BLASH Calderón">
+        </div>
+      </div>
+      <div class="about__text">
+        <h2 class="section-title section-title--left">Sobre Nosotros</h2>
+        <p>
+          <strong>BLASH</strong> nace como un espacio nuevo y fresco dentro de la parroquia Calderón, creado para hombres que valoran el detalle, la puntualidad y el buen cuidado de su imagen personal.
+        </p>
+        <p>
+          Combinamos la precisión de las técnicas clásicas con los estilos modernos en degradados y diseño de barba, brindando un servicio impecable en un ambiente cómodo, limpio y con buena música.
+        </p>
+        <ul class="about__list">
+          <li>✔ Barberos calificados y en constante actualización</li>
+          <li>✔ Productos cosméticos de alta gama</li>
+          <li>✔ Estaciones desinfectadas y climatizadas</li>
+        </ul>
+      </div>
     </div>
   </section>
 
