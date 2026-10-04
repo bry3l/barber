@@ -163,7 +163,7 @@ input:focus-visible {
 }
 
 /* =========================================================
-   HEADER / NAV
+   HEADER / NAVEGACIÓN
    ========================================================= */
 .header {
   position: fixed;
@@ -258,7 +258,7 @@ input:focus-visible {
 }
 
 /* =========================================================
-   ANIMACIONES AUTOMÁTICAS (Elimina delays quemados inline)
+   ANIMACIONES AUTOMÁTICAS (Sin CSS inline en HTML)
    ========================================================= */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -452,7 +452,7 @@ input:focus-visible {
   padding: 5rem 0;
   background-color: var(--color-bg-alt);
 }
-.galeria {
+.services__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
@@ -516,7 +516,7 @@ input:focus-visible {
 }
 
 /* =========================================================
-   PRODUCTOS (Carrusel sin código quemado)
+   PRODUCTOS (CARRUSEL LIMPIO)
    ========================================================= */
 .products-section {
   padding: 5rem 0;
@@ -950,7 +950,7 @@ input:focus-visible {
 }
 
 /* =========================================================
-   MODALES
+   MODALES (RESERVA Y ANTES/DESPUÉS)
    ========================================================= */
 .modal {
   position: fixed;
@@ -1302,7 +1302,7 @@ input:focus-visible {
 .whatsapp-float:hover { transform: scale(1.08); }
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE (TABLETS Y SMARTPHONES)
    ========================================================= */
 @media (max-width: 900px) {
   .hero__grid,
