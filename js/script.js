@@ -48,19 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
    }
-    
 
- /* =========================================================
+/* =========================================================
      2. RENDERIZAR PRODUCTOS DESDE PRODUCTOS_DATA
      ========================================================= */
   const prodWindow = document.getElementById('productsWindow');
 
   if (prodWindow && typeof PRODUCTOS_DATA !== 'undefined') {
-    // Nos aseguramos de que el contenedor exterior permita scroll horizontal
-    prodWindow.style.overflowX = 'auto';
-    prodWindow.style.scrollBehavior = 'smooth';
-    prodWindow.style.width = '100%';
-
     const itemsHTML = PRODUCTOS_DATA.map(p => `
       <div class="product-item" data-id="${p.id}" data-name="${p.nombre}" data-price="${p.precio}" data-img="${p.imagen}">
         <div class="product-photo">
@@ -79,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
 
-    // Forzamos el contenedor track con display flex en línea para que nunca se apile
-    prodWindow.innerHTML = `<div class="products-track" style="display: flex !important; flex-direction: row !important; gap: 1.5rem !important; width: max-content !important;">${itemsHTML}</div>`;
+    // Mete todas las tarjetas dentro de .products-track una sola vez
+    prodWindow.innerHTML = `<div class="products-track">${itemsHTML}</div>`;
   }
 
   /* =========================================================
