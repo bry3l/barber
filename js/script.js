@@ -50,15 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
    }
     
 
-
  /* =========================================================
      2. RENDERIZAR PRODUCTOS DESDE PRODUCTOS_DATA
      ========================================================= */
   const prodWindow = document.getElementById('productsWindow');
-  const prodTrack = document.querySelector('.products-track') || prodWindow;
 
-  if (prodTrack && typeof PRODUCTOS_DATA !== 'undefined') {
-    prodTrack.innerHTML = PRODUCTOS_DATA.map(p => `
+  if (prodWindow && typeof PRODUCTOS_DATA !== 'undefined') {
+    // Nos aseguramos de que el contenedor exterior permita scroll horizontal
+    prodWindow.style.overflowX = 'auto';
+    prodWindow.style.scrollBehavior = 'smooth';
+    prodWindow.style.width = '100%';
+
+    const itemsHTML = PRODUCTOS_DATA.map(p => `
       <div class="product-item" data-id="${p.id}" data-name="${p.nombre}" data-price="${p.precio}" data-img="${p.imagen}">
         <div class="product-photo">
           ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
@@ -75,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `).join('');
+
+    // Forzamos el contenedor track con display flex en línea para que nunca se apile
+    prodWindow.innerHTML = `<div class="products-track" style="display: flex !important; flex-direction: row !important; gap: 1.5rem !important; width: max-content !important;">${itemsHTML}</div>`;
   }
 
   /* =========================================================
