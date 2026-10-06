@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('blash_last_update', now);
       this.setCookie('blash_last_update_cookie', now);
     },
-    saveToIndexedDB(order) {
+   saveToIndexedDB(order) {
       const request = indexedDB.open('BlashBarberDB', 1);
       request.onupgradeneeded = (e) => {
         const db = e.target.result;
@@ -36,10 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
       request.onsuccess = (e) => {
         const db = e.target.result;
         const tx = db.transaction('pedidos', 'readwrite');
-        tx.objectStore('pedidos').add({ ...order, fecha: new Date().toISOString() });
+        
+        // Asigna sincronizado = true si hay internet, o false si te quitaron la red
+        const pedidoConEstado = {
+          ...order,
+          fecha: new Date().toISOString(),
+          sincronizado: navigator.onLine
+        };
+
+        tx.objectStore('pedidos').add(pedidoConEstado);
       };
-    }
-  };
+    
 
   /* =========================================================
      2. RENDERIZAR PRODUCTOS DESDE PRODUCTOS_DATA
@@ -368,6 +375,53 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = '';
     }));
   }
+     /* =========================================================
+     SINCRONIZACIÓN AUTOMÁTICA AL RECUPERAR INTERNET
+     ========================================================= */
+ function sincronizarPedidosPendientes() {
+    const request = indexedDB.open('BlashBarberDB', 1);
+    request.onsuccess = (e) => {
+      const db = e.target.result;
+      const tx = db.transaction('pedidos', 'readwrite');
+      const store = tx.objectStore('pedidos');
+      let huboPendientes = false;
+
+      store.openCursor().onsuccess = (event) => {
+        const cursor = event.target.result;
+        if (cursor) {
+          // Si el pedido se hizo en modo offline
+          if (cursor.value.sincronizado === false) {
+            huboPendientes = true;
+            const pedidoActualizado = cursor.value;
+            pedidoActualizado.sincronizado = true;
+            pedidoActualizado.fechaSincronizacion = new Date().toISOString();
+            
+            cursor.update(pedidoActualizado);
+            console.log(`Pedido #${cursor.key} sincronizado tras reconexión.`);
+          }
+          cursor.continue();
+        }
+      };
+
+      // Se ejecuta cuando termina de recorrer y actualizar la base de datos
+      tx.oncomplete = () => {
+        if (huboPendientes) {
+          alert('🟢 ¡Conexión restablecida! Los pedidos pendientes se han sincronizado correctamente.');
+        }
+      };
+    };
+  }
+
+  // Evento que se dispara al reconectar el internet
+  window.addEventListener('online', () => {
+    sincronizarPedidosPendientes();
+  });
+
+  window.addEventListener('offline', () => {
+    console.warn('⚠️️ Sin conexión. Los pedidos se guardarán pendientes de sincronización.');
+  });
+
+
 
   // Inicializar UI del carrito
   updateCartUI();
