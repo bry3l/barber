@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('blash_last_update', now);
       this.setCookie('blash_last_update_cookie', now);
     },
-   saveToIndexedDB(order) {
+    saveToIndexedDB(order) {
       const request = indexedDB.open('BlashBarberDB', 1);
       request.onupgradeneeded = (e) => {
         const db = e.target.result;
@@ -36,23 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
       request.onsuccess = (e) => {
         const db = e.target.result;
         const tx = db.transaction('pedidos', 'readwrite');
-        
-        // Asigna sincronizado = true si hay internet, o false si te quitaron la red
         const pedidoConEstado = {
           ...order,
           fecha: new Date().toISOString(),
           sincronizado: navigator.onLine
         };
-
         tx.objectStore('pedidos').add(pedidoConEstado);
       };
+    }
+  };
 
-   }
-
-/* =========================================================
+  /* =========================================================
      2. RENDERIZAR PRODUCTOS DESDE PRODUCTOS_DATA
      ========================================================= */
-  const prodWindow = document.getElementById('productsWindow');
+  const prodWindow = document.getElementById('productsWindow') || document.querySelector('.products-window');
 
   if (prodWindow && typeof PRODUCTOS_DATA !== 'undefined') {
     const itemsHTML = PRODUCTOS_DATA.map(p => `
@@ -73,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
 
-    // Mete todas las tarjetas dentro de .products-track una sola vez
     prodWindow.innerHTML = `<div class="products-track">${itemsHTML}</div>`;
   }
 
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================= */
   let cart = Storage.getCart();
 
-  const cartBadge = document.getElementById('cartBadgeCount');
+  const cartBadge = document.getElementById('cartBadgeCount') || document.querySelector('.cart-trigger__badge');
   const cartDrawerItems = document.getElementById('cartDrawerItems');
   const cartDrawerSubtotal = document.getElementById('cartDrawerSubtotal');
   const cartDrawerTax = document.getElementById('cartDrawerTax');
@@ -93,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
     const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    const tax = subtotal * 0.15; // 15% IVA
+    const tax = subtotal * 0.15; // 15% IVA Ecuador
     const total = subtotal + tax;
 
     if (cartBadge) cartBadge.textContent = totalQty;
@@ -131,33 +127,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartDrawerTotal) cartDrawerTotal.textContent = `$${total.toFixed(2)}`;
   };
 
-  // Delegación de eventos para agregar productos al carrito
-  if (prodWindow) {
-    prodWindow.addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-add-cart');
-      if (!btn) return;
+  /* =========================================================
+     4. APERTURA Y CIERRE DEL DRAWER
+     ========================================================= */
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const openCartBtn = document.getElementById('openCartBtn') || document.querySelector('.cart-trigger');
+  const closeCartBtn = document.getElementById('closeCartBtn') || document.querySelector('.cart-drawer__close');
+  const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
 
+  const toggleCart = (isOpen) => {
+    if (cartDrawer) {
+      cartDrawer.classList.toggle('is-active', isOpen);
+      cartDrawer.setAttribute('aria-hidden', String(!isOpen));
+    }
+    if (cartOverlay) cartOverlay.classList.toggle('is-active', isOpen);
+    if (openCartBtn) openCartBtn.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  if (openCartBtn) openCartBtn.addEventListener('click', () => toggleCart(true));
+  if (closeCartBtn) closeCartBtn.addEventListener('click', () => toggleCart(false));
+  if (cartOverlay) cartOverlay.addEventListener('click', () => toggleCart(false));
+  if (goToCheckoutBtn) goToCheckoutBtn.addEventListener('click', () => toggleCart(false));
+
+  // DELEGACIÓN DE EVENTO: Botón "Pedir" dentro del carrusel dinámico
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-add-cart');
+    if (btn) {
       const card = btn.closest('.product-item');
-      if (!card) return;
+      if (card) {
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const price = parseFloat(card.dataset.price);
+        const img = card.dataset.img;
 
-      const id = card.dataset.id;
-      const name = card.dataset.name;
-      const price = parseFloat(card.dataset.price);
-      const img = card.dataset.img;
+        const existing = cart.find(i => String(i.id) === String(id));
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ id, name, price, img, quantity: 1 });
+        }
 
-      const existing = cart.find(i => String(i.id) === String(id));
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ id, name, price, img, quantity: 1 });
+        updateCartUI();
+        toggleCart(true);
       }
+    }
+  });
 
-      updateCartUI();
-      toggleCart(true);
-    });
-  }
-
-  // Delegación de eventos en el drawer del carrito (+, -, eliminar)
+  // Delegación de eventos dentro del drawer (+, -, eliminar)
   if (cartDrawerItems) {
     cartDrawerItems.addEventListener('click', (e) => {
       const id = e.target.dataset.id;
@@ -192,54 +209,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     4. APERTURA Y CIERRE DEL DRAWER
+     5. CARRUSEL DE PRODUCTOS (FLECHAS DIRECCIONALES)
      ========================================================= */
-  const cartDrawer = document.getElementById('cartDrawer');
-  const cartOverlay = document.getElementById('cartOverlay');
-  const openCartBtn = document.getElementById('openCartBtn');
-  const closeCartBtn = document.getElementById('closeCartBtn');
-  const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
+  const prodBtnPrev = document.getElementById('prodBtnPrev') || document.querySelector('.products-arrow-left') || document.querySelector('.carousel-btn-prev');
+  const prodBtnNext = document.getElementById('prodBtnNext') || document.querySelector('.products-arrow-right') || document.querySelector('.carousel-btn-next');
 
-  const toggleCart = (isOpen) => {
-    if (cartDrawer) {
-      cartDrawer.classList.toggle('is-active', isOpen);
-      cartDrawer.setAttribute('aria-hidden', String(!isOpen));
-    }
-    if (cartOverlay) cartOverlay.classList.toggle('is-active', isOpen);
-    if (openCartBtn) openCartBtn.setAttribute('aria-expanded', String(isOpen));
-  };
-
-  if (openCartBtn) openCartBtn.addEventListener('click', () => toggleCart(true));
-  if (closeCartBtn) closeCartBtn.addEventListener('click', () => toggleCart(false));
-  if (cartOverlay) cartOverlay.addEventListener('click', () => toggleCart(false));
-  if (goToCheckoutBtn) goToCheckoutBtn.addEventListener('click', () => toggleCart(false));
-
-  /* =========================================================
-     5. CARRUSEL DE PRODUCTOS (DESPLAZAMIENTO DIRECCIONAL)
-     ========================================================= */
-  const prodBtnPrev = document.getElementById('prodBtnPrev');
-  const prodBtnNext = document.getElementById('prodBtnNext');
-
-  if (prodWindow && prodBtnPrev && prodBtnNext) {
-    const getStep = () => {
-      const item = prodWindow.querySelector('.product-item');
-      return item ? item.offsetWidth + 24 : 294;
-    };
-
+  if (prodWindow && prodBtnNext) {
     prodBtnNext.addEventListener('click', () => {
-      const step = getStep();
+      const card = prodWindow.querySelector('.product-item');
+      const step = card ? card.offsetWidth + 24 : 304;
       const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
-      if (prodWindow.scrollLeft >= maxScroll - 10) {
+      if (prodWindow.scrollLeft >= maxScroll - 15) {
         prodWindow.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         prodWindow.scrollBy({ left: step, behavior: 'smooth' });
       }
     });
+  }
 
+  if (prodWindow && prodBtnPrev) {
     prodBtnPrev.addEventListener('click', () => {
-      const step = getStep();
+      const card = prodWindow.querySelector('.product-item');
+      const step = card ? card.offsetWidth + 24 : 304;
       const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
-      if (prodWindow.scrollLeft <= 5) {
+      if (prodWindow.scrollLeft <= 10) {
         prodWindow.scrollTo({ left: maxScroll, behavior: 'smooth' });
       } else {
         prodWindow.scrollBy({ left: -step, behavior: 'smooth' });
@@ -280,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     7. VALIDACIONES DE FORMULARIO CON REGEX
+     7. FORMULARIO CHECKOUT CON REGEX
      ========================================================= */
   const form = document.getElementById('checkoutForm');
   const regexRules = {
@@ -378,10 +371,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = '';
     }));
   }
-     /* =========================================================
-     SINCRONIZACIÓN AUTOMÁTICA AL RECUPERAR INTERNET
+
+  /* =========================================================
+     9. SINCRONIZACIÓN AUTOMÁTICA AL RECUPERAR INTERNET
      ========================================================= */
- function sincronizarPedidosPendientes() {
+  function sincronizarPedidosPendientes() {
     const request = indexedDB.open('BlashBarberDB', 1);
     request.onsuccess = (e) => {
       const db = e.target.result;
@@ -392,7 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
       store.openCursor().onsuccess = (event) => {
         const cursor = event.target.result;
         if (cursor) {
-          // Si el pedido se hizo en modo offline
           if (cursor.value.sincronizado === false) {
             huboPendientes = true;
             const pedidoActualizado = cursor.value;
@@ -406,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      // Se ejecuta cuando termina de recorrer y actualizar la base de datos
       tx.oncomplete = () => {
         if (huboPendientes) {
           alert('🟢 ¡Conexión restablecida! Los pedidos pendientes se han sincronizado correctamente.');
@@ -415,16 +407,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Evento que se dispara al reconectar el internet
   window.addEventListener('online', () => {
     sincronizarPedidosPendientes();
   });
 
   window.addEventListener('offline', () => {
-    console.warn('⚠️️ Sin conexión. Los pedidos se guardarán pendientes de sincronización.');
+    console.warn('⚠ Sin conexión. Los pedidos se guardarán pendientes de sincronización.');
   });
-
-
 
   // Inicializar UI del carrito
   updateCartUI();
