@@ -50,31 +50,32 @@ document.addEventListener('DOMContentLoaded', () => {
    }
     
 
-  /* =========================================================
+
+ /* =========================================================
      2. RENDERIZAR PRODUCTOS DESDE PRODUCTOS_DATA
      ========================================================= */
   const prodWindow = document.getElementById('productsWindow');
+  const prodTrack = document.querySelector('.products-track') || prodWindow;
 
-  if (prodWindow && typeof PRODUCTOS_DATA !== 'undefined') {
-    prodWindow.innerHTML = PRODUCTOS_DATA.map(p => `
-      <article class="product-item" data-id="${p.id}" data-name="${p.nombre}" data-price="${p.precio}" data-img="${p.imagen}">
-        <div class="product-item__thumb">
-          ${p.tag ? `<span class="badge-tag">${p.tag}</span>` : ''}
+  if (prodTrack && typeof PRODUCTOS_DATA !== 'undefined') {
+    prodTrack.innerHTML = PRODUCTOS_DATA.map(p => `
+      <div class="product-item" data-id="${p.id}" data-name="${p.nombre}" data-price="${p.precio}" data-img="${p.imagen}">
+        <div class="product-photo">
+          ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
         </div>
-        <div class="product-item__content">
-          <span class="product-item__category">${p.categoria}</span>
-          <h3 class="product-item__title">${p.nombre}</h3>
-          <p class="product-item__desc">${p.descripcion}</p>
-          <div class="product-item__footer">
-            <span class="product-item__price">$${p.precio.toFixed(2)}</span>
+        <div class="product-info">
+          <span class="product-type">${p.categoria}</span>
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <div class="product-footer">
+            <strong>$${p.precio.toFixed(2)}</strong>
             <button type="button" class="btn-add-cart">Pedir 🛒</button>
           </div>
         </div>
-      </article>
+      </div>
     `).join('');
   }
-  
 
   /* =========================================================
      3. GESTIÓN DEL CARRITO (Añadir, eliminar, actualizar, totales)
