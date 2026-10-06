@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tx.objectStore('pedidos').add(pedidoConEstado);
       };
+
+   }
     
 
   /* =========================================================
