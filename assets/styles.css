@@ -569,30 +569,37 @@ ul {
   align-items: center;
 }
 
-/* El contenedor del carrusel */
+/* Ventana de visualización con scroll horizontal suave */
 .products-window,
 #productsWindow {
+  width: 100% !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  padding: 1rem 0 !important;
+  display: block !important;
+}
+.products-window::-webkit-scrollbar,
+#productsWindow::-webkit-scrollbar { 
+  display: none !important; 
+}
+
+/* Contenedor flexible de todas las tarjetas en una fila horizontal */
+.products-track {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   gap: 1.5rem !important;
-  width: 100%;
-  overflow-x: auto !important;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 1rem 0;
-}
-.products-window::-webkit-scrollbar,
-#productsWindow::-webkit-scrollbar { 
-  display: none; 
+  width: max-content !important;
 }
 
-/* Tarjeta individual de producto */
+/* Tarjeta individual de producto con medidas fijas */
 .product-item {
-  flex: 0 0 270px !important;
-  width: 270px !important;
-  min-width: 270px !important;
+  flex: 0 0 280px !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
@@ -609,7 +616,7 @@ ul {
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
 }
 
-/* Imagen del producto */
+/* Fotografía del producto */
 .product-item__thumb,
 .product-photo {
   position: relative;
@@ -630,7 +637,7 @@ ul {
   transform: scale(1.06); 
 }
 
-/* Tag / Badge */
+/* Etiqueta / Tag flotante */
 .badge-tag,
 .product-tag {
   position: absolute;
@@ -646,7 +653,7 @@ ul {
   text-transform: uppercase;
 }
 
-/* Información y texto */
+/* Textos informativos */
 .product-item__content,
 .product-info {
   display: flex;
@@ -680,7 +687,7 @@ ul {
   margin-bottom: 1.2rem;
 }
 
-/* Pie de la tarjeta */
+/* Pie de tarjeta: precio y botón */
 .product-item__footer,
 .product-footer {
   display: flex;
@@ -717,7 +724,7 @@ ul {
   color: #0d0d0d;
 }
 
-/* Flechas de navegación */
+/* Flechas direccionales */
 .products-arrow {
   position: absolute;
   top: 50%;
