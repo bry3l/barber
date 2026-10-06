@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </article>
     `).join('');
   }
+  
 
   /* =========================================================
      3. GESTIÓN DEL CARRITO (Añadir, eliminar, actualizar, totales)
