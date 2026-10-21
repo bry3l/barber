@@ -80,5 +80,40 @@
     "precio": 9.00,
     "descripcion": "Madera maciza para cepillar y dar brillo uniforme a la barba.",
     "imagen": "https://images.unsplash.com/photo-1593702295094-ada7554100c3?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 11,
+    "nombre": "Cera Fiber Strong",
+    "categoria": "FIJACIÓN",
+    "precio": 13.50,
+    "descripcion": "Textura flexible y fijación fuerte para peinados duraderos.",
+    "imagen": "https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?w=600&auto=format&fit=crop&q=80",
+    "tag": "NUEVO"
+  },
+  {
+    "id": 12,
+    "nombre": "Crema Facial Hidratante",
+    "categoria": "CUIDADO FACIAL",
+    "precio": 15.00,
+    "descripcion": "Hidratación ligera para una piel fresca y saludable todo el día.",
+    "imagen": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&auto=format&fit=crop&q=80",
+    "tag": "RECOMENDADO"
+  },
+  {
+    "id": 13,
+    "nombre": "Peine Profesional Carbono",
+    "categoria": "HERRAMIENTAS",
+    "precio": 7.50,
+    "descripcion": "Peine resistente al calor, ideal para cortes y peinados precisos.",
+    "imagen": "https://images.unsplash.com/photo-1620331311520-246422fd82f9?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 14,
+    "nombre": "Mascarilla Revitalizante",
+    "categoria": "CUIDADO CAPILAR",
+    "precio": 16.00,
+    "descripcion": "Tratamiento nutritivo que fortalece y devuelve brillo al cabello.",
+    "imagen": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80",
+    "tag": "TOP VENTAS"
   }
 ]
