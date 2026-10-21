@@ -1,45 +1,70 @@
-/**
- * Controlador Principal
- * Inicializa la aplicación, coordina el catálogo, gestiona el carrito drawer,
- * maneja el carrusel y ejecuta validaciones con Expresiones Regulares (Regex).
- */
-
-import { ProductRepository } from './repo.js';
 import { StorageService } from './storage.js';
 import { Cart } from './cart.js';
 import { View } from './view.js';
+import { supabase } from './supabase.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cart = new Cart();
 
-  // 1. CARGA INICIAL DE CATÁLOGO DESDE JSON
-  const products = await ProductRepository.getProducts();
+  // Cargar productos desde Supabase
+  const { data, error } = await supabase
+    .from('productos')
+    .select(`
+      pro_codigo,
+      pro_nombre,
+      pro_descripcion,
+      pro_precio,
+      pro_precio_promocional,
+      pro_activo,
+      pro_vendible
+    `)
+    .eq('pro_activo', true)
+    .eq('pro_vendible', true)
+    .order('pro_nombre');
 
-  const handleAddToCart = (product) => {
+  if (error) {
+    console.error('Error al cargar productos:', error);
+    View.announce('No se pudieron cargar los productos.');
+    return;
+  }
+
+  const products = data.map(product => ({
+    id: product.pro_codigo,
+    nombre: product.pro_nombre,
+    descripcion: product.pro_descripcion || '',
+    precio: Number(
+      product.pro_precio_promocional ?? product.pro_precio
+    ),
+    imagen: '',
+    stock: 0
+  }));
+
+  const renderCart = () => {
+    View.renderCart(cart, updateQuantity, removeItem);
+    View.updateTimestamp(StorageService.getTimestamp());
+  };
+
+  const addToCart = product => {
     cart.addItem(product);
-    View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-    View.updateTimestamp(StorageService.getTimestamp());
-    View.announce(`Se agregó ${product.nombre} al carrito de compras`);
+    renderCart();
+    View.announce(`Se agregó ${product.nombre} al carrito`);
   };
 
-  const handleUpdateQty = (productId, qty) => {
-    cart.updateQuantity(productId, qty);
-    View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-    View.updateTimestamp(StorageService.getTimestamp());
+  const updateQuantity = (productId, quantity) => {
+    cart.updateQuantity(productId, quantity);
+    renderCart();
   };
 
-  const handleRemoveItem = (productId) => {
+  const removeItem = productId => {
     cart.removeItem(productId);
-    View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-    View.updateTimestamp(StorageService.getTimestamp());
+    renderCart();
     View.announce('Producto eliminado del carrito');
   };
 
-  View.renderCatalog(products, handleAddToCart);
-  View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-  View.updateTimestamp(StorageService.getTimestamp());
+  View.renderCatalog(products, addToCart);
+  renderCart();
 
-  // 2. PANEL LATERAL DEL CARRITO (DRAWER ACCESIBLE)
+  // Carrito lateral
   const openCartBtn = document.getElementById('openCartBtn');
   const closeCartBtn = document.getElementById('closeCartBtn');
   const cartDrawer = document.getElementById('cartDrawer');
@@ -47,307 +72,256 @@ document.addEventListener('DOMContentLoaded', async () => {
   const clearCartBtn = document.getElementById('clearCartBtn');
   const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
 
-  const toggleCartDrawer = (isOpen) => {
-    cartDrawer.classList.toggle('is-active', isOpen);
-    cartOverlay.classList.toggle('is-active', isOpen);
-    cartDrawer.setAttribute('aria-hidden', String(!isOpen));
-    openCartBtn.setAttribute('aria-expanded', String(isOpen));
+  const toggleCart = open => {
+    if (!cartDrawer || !cartOverlay) return;
+
+    cartDrawer.classList.toggle('is-active', open);
+    cartOverlay.classList.toggle('is-active', open);
+    cartDrawer.setAttribute('aria-hidden', String(!open));
+
+    if (openCartBtn) {
+      openCartBtn.setAttribute('aria-expanded', String(open));
+    }
   };
 
-  openCartBtn.addEventListener('click', () => toggleCartDrawer(true));
-  closeCartBtn.addEventListener('click', () => toggleCartDrawer(false));
-  cartOverlay.addEventListener('click', () => toggleCartDrawer(false));
-  if (goToCheckoutBtn) {
-    goToCheckoutBtn.addEventListener('click', () => toggleCartDrawer(false));
-  }
+  openCartBtn?.addEventListener('click', () => toggleCart(true));
+  closeCartBtn?.addEventListener('click', () => toggleCart(false));
+  cartOverlay?.addEventListener('click', () => toggleCart(false));
+  goToCheckoutBtn?.addEventListener('click', () => toggleCart(false));
 
-  clearCartBtn.addEventListener('click', () => {
+  clearCartBtn?.addEventListener('click', () => {
     if (cart.items.length === 0) return;
+
     if (confirm('¿Seguro que deseas vaciar tu carrito?')) {
       cart.clear();
-      View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-      View.updateTimestamp(StorageService.getTimestamp());
-      View.announce('El carrito ha sido vaciado por completo');
+      renderCart();
+      View.announce('El carrito fue vaciado');
     }
   });
 
-  // 3. CARRUSEL DIRECCIONAL DE PRODUCTOS
-  const prodWindow = document.getElementById('productsWindow');
+  // Carrusel de productos
+  const productsWindow = document.getElementById('productsWindow');
   const prodBtnPrev = document.getElementById('prodBtnPrev');
   const prodBtnNext = document.getElementById('prodBtnNext');
 
-  if (prodWindow && prodBtnPrev && prodBtnNext) {
-    const getScrollStep = () => {
-      const item = prodWindow.querySelector('.product-item');
+  if (productsWindow && prodBtnPrev && prodBtnNext) {
+    const getStep = () => {
+      const item = productsWindow.querySelector('.product-item');
       return item ? item.offsetWidth + 24 : 294;
     };
 
     prodBtnNext.addEventListener('click', () => {
-      const step = getScrollStep();
-      const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
-      if (prodWindow.scrollLeft >= maxScroll - 10) {
-        prodWindow.scrollTo({ left: 0, behavior: 'smooth' });
+      const max = productsWindow.scrollWidth - productsWindow.clientWidth;
+
+      if (productsWindow.scrollLeft >= max - 10) {
+        productsWindow.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        prodWindow.scrollBy({ left: step, behavior: 'smooth' });
+        productsWindow.scrollBy({
+          left: getStep(),
+          behavior: 'smooth'
+        });
       }
     });
 
     prodBtnPrev.addEventListener('click', () => {
-      const step = getScrollStep();
-      const maxScroll = prodWindow.scrollWidth - prodWindow.clientWidth;
-      if (prodWindow.scrollLeft <= 5) {
-        prodWindow.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      const max = productsWindow.scrollWidth - productsWindow.clientWidth;
+
+      if (productsWindow.scrollLeft <= 5) {
+        productsWindow.scrollTo({ left: max, behavior: 'smooth' });
       } else {
-        prodWindow.scrollBy({ left: -step, behavior: 'smooth' });
+        productsWindow.scrollBy({
+          left: -getStep(),
+          behavior: 'smooth'
+        });
       }
     });
   }
 
-  // 4. CARRUSEL DE INSTALACIONES
-  const carruselTrack = document.getElementById('carruselTrack');
+  // Carrusel de instalaciones
+  const track = document.getElementById('carruselTrack');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const dotsContainer = document.getElementById('carruselDots');
 
-  if (carruselTrack && prevBtn && nextBtn && dotsContainer) {
-    const slides = carruselTrack.querySelectorAll('.carrusel-slide');
+  if (track && prevBtn && nextBtn && dotsContainer) {
+    const slides = [...track.querySelectorAll('.carrusel-slide')];
     let currentIndex = 0;
 
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, i) => {
+    const dots = slides.map((_, index) => {
       const dot = document.createElement('span');
-      dot.className = `carrusel-dot ${i === 0 ? 'is-active' : ''}`;
-      dot.addEventListener('click', () => goToSlide(i));
+      dot.className = `carrusel-dot ${
+        index === 0 ? 'is-active' : ''
+      }`;
       dotsContainer.appendChild(dot);
+      return dot;
     });
 
-    const dots = dotsContainer.querySelectorAll('.carrusel-dot');
-    const goToSlide = (idx) => {
-      currentIndex = (idx + slides.length) % slides.length;
-      carruselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIndex));
+    const showSlide = index => {
+      if (slides.length === 0) return;
+
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === currentIndex);
+      });
     };
 
-    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-    setInterval(() => goToSlide(currentIndex + 1), 5000);
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+
+    prevBtn.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+
+    setInterval(() => showSlide(currentIndex + 1), 5000);
   }
 
-  // 5. VALIDACIÓN DEL FORMULARIO CON EXPRESIONES REGULARES (REGEX)
+  // Validación del checkout
   const checkoutForm = document.getElementById('checkoutForm');
 
-  const validators = {
-    // Nombre y Apellido: al menos dos palabras de 2 a 30 caracteres alfabéticos
-    nombre: {
-      regex: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,}(?:\s+[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,})+$/,
-      msg: 'Ingresa tu nombre y apellido completos (solo letras).'
-    },
-    // Correo: formato estándar RFC 5322 simplificado
-    email: {
-      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      msg: 'Ingresa un correo electrónico válido (ejemplo@dominio.com).'
-    },
-    // Teléfono: celulares de Ecuador iniciando con 09 y 10 dígitos numéricos en total
-    telefono: {
-      regex: /^09\d{8}$/,
-      msg: 'El número celular debe iniciar con 09 y tener exactamente 10 dígitos.'
-    },
-    // Cédula: 10 dígitos numéricos
-    cedula: {
-      regex: /^\d{10}$/,
-      msg: 'La cédula debe contener exactamente 10 dígitos numéricos.'
-    },
-    // Dirección: mínimo 8 caracteres alfanuméricos con letras y números
-    direccion: {
-      regex: /^.{8,}$/,
-      msg: 'La dirección debe tener al menos 8 caracteres.'
-    }
-  };
+  if (checkoutForm) {
+    const validators = {
+      nombre: {
+        regex: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,}(?:\s+[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,})+$/,
+        message: 'Ingresa tu nombre y apellido.'
+      },
+      email: {
+        regex: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+        message: 'Ingresa un correo válido.'
+      },
+      telefono: {
+        regex: /^09\d{8}$/,
+        message: 'Debe tener 10 dígitos y comenzar con 09.'
+      },
+      cedula: {
+        regex: /^\d{10}$/,
+        message: 'La cédula debe tener 10 dígitos.'
+      },
+      direccion: {
+        regex: /^.{8,}$/,
+        message: 'La dirección debe tener mínimo 8 caracteres.'
+      }
+    };
 
-  const validateField = (input) => {
-    const name = input.name;
-    const rule = validators[name];
-    if (!rule) return true;
+    const validateField = input => {
+      const rule = validators[input.name];
+      if (!rule) return true;
 
-    const errorSpan = document.getElementById(`error${name.charAt(0).toUpperCase() + name.slice(1)}`);
-    const isValid = rule.regex.test(input.value.trim());
+      const valid = rule.regex.test(input.value.trim());
+      input.setAttribute('aria-invalid', String(!valid));
 
-    if (!isValid) {
-      input.setAttribute('aria-invalid', 'true');
-      if (errorSpan) errorSpan.textContent = rule.msg;
-    } else {
-      input.setAttribute('aria-invalid', 'false');
-      if (errorSpan) errorSpan.textContent = '';
-    }
+      return valid;
+    };
 
-    return isValid;
-  };
+    Object.keys(validators).forEach(name => {
+      const input = checkoutForm.elements[name];
 
-  Object.keys(validators).forEach(fieldName => {
-    const input = checkoutForm.elements[fieldName];
-    if (input) {
-      input.addEventListener('input', () => validateField(input));
-      input.addEventListener('blur', () => validateField(input));
-    }
-  });
-
-  // Envío del Checkout
-  checkoutForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (cart.items.length === 0) {
-      alert('Tu carrito está vacío. Añade productos antes de procesar el pago.');
-      return;
-    }
-
-    let isFormValid = true;
-    Object.keys(validators).forEach(fieldName => {
-      const input = checkoutForm.elements[fieldName];
-      if (input && !validateField(input)) {
-        isFormValid = false;
+      if (input) {
+        input.addEventListener('input', () => validateField(input));
+        input.addEventListener('blur', () => validateField(input));
       }
     });
 
-    if (!isFormValid) {
-      View.announce('Hay errores en el formulario. Por favor revisa los campos en rojo.');
-      return;
-    }
+    checkoutForm.addEventListener('submit', async event => {
+      event.preventDefault();
 
-    const customerData = {
-      nombre: checkoutForm.elements['nombre'].value.trim(),
-      email: checkoutForm.elements['email'].value.trim(),
-      telefono: checkoutForm.elements['telefono'].value.trim(),
-      cedula: checkoutForm.elements['cedula'].value.trim(),
-      direccion: checkoutForm.elements['direccion'].value.trim()
-    };
+      if (cart.items.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+      }
 
-    // 1. Guardar en SessionStorage
-    StorageService.saveSessionCustomer(customerData);
+      const valid = Object.keys(validators).every(name => {
+        const input = checkoutForm.elements[name];
+        return input ? validateField(input) : true;
+      });
 
-    // 2. Guardar orden en IndexedDB
-    const orderData = {
-      cliente: customerData,
-      productos: cart.items,
-      subtotal: cart.getSubtotal(),
-      iva: cart.getTax(),
-      total: cart.getTotal()
-    };
-    await StorageService.saveOrderToIndexedDB(orderData);
+      if (!valid) {
+        View.announce('Revisa los campos del formulario.');
+        return;
+      }
 
-    // 3. Confirmación accesible y limpieza
-    View.announce('Orden procesada con éxito y registrada en base de datos local');
-    alert(`¡Orden confirmada para ${customerData.nombre}! Se ha guardado en IndexedDB con un total de $${cart.getTotal().toFixed(2)}.`);
+      const customer = {
+        nombre: checkoutForm.elements.nombre.value.trim(),
+        email: checkoutForm.elements.email.value.trim(),
+        telefono: checkoutForm.elements.telefono.value.trim(),
+        cedula: checkoutForm.elements.cedula.value.trim(),
+        direccion: checkoutForm.elements.direccion.value.trim()
+      };
 
-    cart.clear();
-    View.renderCart(cart, handleUpdateQty, handleRemoveItem);
-    View.updateTimestamp(StorageService.getTimestamp());
-    checkoutForm.reset();
+      StorageService.saveSessionCustomer(customer);
 
-    Object.keys(validators).forEach(fieldName => {
-      const input = checkoutForm.elements[fieldName];
-      if (input) input.removeAttribute('aria-invalid');
+      const order = {
+        cliente: customer,
+        productos: cart.items,
+        subtotal: cart.getSubtotal(),
+        iva: cart.getTax(),
+        total: cart.getTotal()
+      };
+
+      await StorageService.saveOrderToIndexedDB(order);
+
+      alert(
+        `¡Orden confirmada para ${customer.nombre}! ` +
+        `Total: $${cart.getTotal().toFixed(2)}`
+      );
+
+      cart.clear();
+      renderCart();
+      checkoutForm.reset();
     });
-  });
+  }
 
-  // 6. MODAL DE RESERVA DE CITA
+  // Modal de citas
   const bookingModal = document.getElementById('bookingModal');
-  const openBookingBtns = document.querySelectorAll('[data-open-modal="bookingModal"]');
-  const closeModals = document.querySelectorAll('[data-close-modal]');
+  const bookingForm = document.getElementById('bookingForm');
 
-  openBookingBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      bookingModal.classList.add('is-open');
-      bookingModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+  document
+    .querySelectorAll('[data-open-modal="bookingModal"]')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        bookingModal?.classList.add('is-open');
+        bookingModal?.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
 
-  closeModals.forEach(btn => {
-    btn.addEventListener('click', () => {
-      bookingModal.classList.remove('is-open');
-      bookingModal.setAttribute('aria-hidden', 'true');
+  document.querySelectorAll('[data-close-modal]').forEach(button => {
+    button.addEventListener('click', () => {
+      bookingModal?.classList.remove('is-open');
+      bookingModal?.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     });
   });
 
-  // Paso a paso modal
-  const bookingForm = document.getElementById('bookingForm');
   if (bookingForm) {
-    let currentStep = 1;
-    const panels = bookingModal.querySelectorAll('.modal__panel');
-    const steps = bookingModal.querySelectorAll('.modal__step');
-    const modalPrev = document.getElementById('modalPrev');
-    const modalNext = document.getElementById('modalNext');
-    const modalSubmit = document.getElementById('modalSubmit');
+    bookingForm.addEventListener('submit', event => {
+      event.preventDefault();
 
-    const updateModalStep = (step) => {
-      currentStep = step;
-      panels.forEach((p, idx) => p.classList.toggle('is-active', idx + 1 === currentStep));
-      steps.forEach((s, idx) => s.classList.toggle('is-active', idx + 1 === currentStep));
-      modalPrev.disabled = currentStep === 1;
+      const servicio = bookingForm.elements.servicio?.value || '';
+      const barbero = bookingForm.elements.barbero?.value || '';
+      const fecha = bookingForm.elements.bookingDate?.value || '';
+      const hora = bookingForm.elements.bookingTime?.value || '';
 
-      if (currentStep === 3) {
-        modalNext.hidden = true;
-        modalSubmit.hidden = false;
-      } else {
-        modalNext.hidden = false;
-        modalSubmit.hidden = true;
-      }
-    };
+      const message =
+        `Hola, quiero reservar una cita.%0A` +
+        `Servicio: ${encodeURIComponent(servicio)}%0A` +
+        `Barbero: ${encodeURIComponent(barbero)}%0A` +
+        `Fecha: ${encodeURIComponent(fecha)}%0A` +
+        `Hora: ${encodeURIComponent(hora)}`;
 
-    modalNext.addEventListener('click', () => {
-      if (currentStep < 3) updateModalStep(currentStep + 1);
-    });
-    modalPrev.addEventListener('click', () => {
-      if (currentStep > 1) updateModalStep(currentStep - 1);
-    });
+      window.open(
+        `https://wa.me/593999999999?text=${message}`,
+        '_blank'
+      );
 
-    // Generar horas
-    const bookingTimes = document.getElementById('bookingTimes');
-    const bookingTimeInput = document.getElementById('bookingTime');
-    const hours = ['09:30', '10:30', '11:30', '14:30', '15:30', '16:30', '17:30', '18:30'];
-    bookingTimes.innerHTML = '';
-    hours.forEach((h, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = `time-option ${i === 0 ? 'is-selected' : ''}`;
-      btn.textContent = h;
-      if (i === 0) bookingTimeInput.value = h;
-      btn.addEventListener('click', () => {
-        bookingTimes.querySelectorAll('.time-option').forEach(t => t.classList.remove('is-selected'));
-        btn.classList.add('is-selected');
-        bookingTimeInput.value = h;
-      });
-      bookingTimes.appendChild(btn);
-    });
-
-    // Generar días
-    const calendarDays = document.getElementById('calendarDays');
-    const bookingDateInput = document.getElementById('bookingDate');
-    calendarDays.innerHTML = '';
-    for (let day = 1; day <= 30; day++) {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = `calendar-day ${day === 5 ? 'is-selected' : ''}`;
-      b.textContent = day;
-      if (day === 5) bookingDateInput.value = `Día ${day}`;
-      b.addEventListener('click', () => {
-        calendarDays.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('is-selected'));
-        b.classList.add('is-selected');
-        bookingDateInput.value = `Día ${day}`;
-      });
-      calendarDays.appendChild(b);
-    }
-
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const servicio = bookingForm.elements['servicio'].value;
-      const barbero = bookingForm.elements['barbero'].value;
-      const fecha = bookingDateInput.value;
-      const hora = bookingTimeInput.value;
-      const msg = `Hola BLASH! Quiero confirmar cita.%0A- Servicio: ${encodeURIComponent(servicio)}%0A- Barbero: ${encodeURIComponent(barbero)}%0A- Fecha: ${encodeURIComponent(fecha)}%0A- Hora: ${encodeURIComponent(hora)}`;
-      window.open(`https://wa.me/593999999999?text=${msg}`, '_blank');
-      bookingModal.classList.remove('is-open');
+      bookingModal?.classList.remove('is-open');
       document.body.style.overflow = '';
     });
   }
