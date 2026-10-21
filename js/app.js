@@ -5,30 +5,36 @@ import { supabase } from './supabase.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cart = new Cart();
+  console.log('Iniciando conexión con Supabase...');
 
   // Cargar productos desde Supabase
   const { data, error } = await supabase
-    .from('productos')
-    .select(`
-      pro_codigo,
-      pro_nombre,
-      pro_descripcion,
-      pro_precio,
-      pro_precio_promocional,
-      pro_activo,
-      pro_vendible
-    `)
-    .eq('pro_activo', true)
-    .eq('pro_vendible', true)
-    .order('pro_nombre');
+  .from('productos')
+  .select(`
+    pro_codigo,
+    pro_nombre,
+    pro_descripcion,
+    pro_precio,
+    pro_precio_promocional,
+    pro_activo,
+    pro_vendible
+  `)
+  .eq('pro_activo', true)
+  .eq('pro_vendible', true)
+  .order('pro_nombre');
 
-  if (error) {
-    console.error('Error al cargar productos:', error);
-    View.announce('No se pudieron cargar los productos.');
-    return;
-  }
+console.log('Respuesta de Supabase:', {
+  data,
+  error
+});
 
-  const products = data.map(product => ({
+if (error) {
+  console.error('Error al cargar productos:', error);
+  View.announce('No se pudieron cargar los productos.');
+  return;
+}
+
+const products = data.map(product => ({
   id: product.pro_codigo,
   nombre: product.pro_nombre,
   descripcion: product.pro_descripcion || '',
