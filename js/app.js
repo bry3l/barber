@@ -29,15 +29,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const products = data.map(product => ({
-    id: product.pro_codigo,
-    nombre: product.pro_nombre,
-    descripcion: product.pro_descripcion || '',
-    precio: Number(
-      product.pro_precio_promocional ?? product.pro_precio
-    ),
-    imagen: '',
-    stock: 0
-  }));
+  id: product.pro_codigo,
+  nombre: product.pro_nombre,
+  descripcion: product.pro_descripcion || '',
+  precio: Number(
+    product.pro_precio_promocional ?? product.pro_precio
+  ),
+  imagen: '',
+  stock: 0
+}));
+
+console.log('Productos desde Supabase:', products);
 
   const renderCart = () => {
     View.renderCart(cart, updateQuantity, removeItem);
