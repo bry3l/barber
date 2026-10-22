@@ -4,31 +4,28 @@ const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({ '&':'&amp;'
 const message = text => { $('loginMessage').textContent = text; };
 const rows = (id, html, colspan = 4) => { $(id).innerHTML = html || `<tr><td colspan="${colspan}">Sin registros</td></tr>`; };
 
-async function adminProfile() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data, error } = await supabase.from('usuarios').select('usu_codigo,rol_codigo,usu_nombre').eq('usu_auth_uuid', user.id).maybeSingle();
-  if (error) throw error;
-  return data?.rol_codigo === 'ROL001' ? data : null;
-}
+async function adminProfile() { const { data: { user } } = await supabase.auth.getUser(); if (!user) return null; const { data, error } = await supabase.from('usuarios').select('usu_codigo,rol_codigo,usu_nombre').eq('usu_auth_uuid', user.id).maybeSingle(); if (error) throw error; return data?.rol_codigo === 'ROL001' ? data : null; }
 async function loadDashboard() {
   const results = await Promise.all([
     supabase.from('productos').select('pro_codigo,pro_sku,pro_nombre,pro_precio,pro_activo').order('pro_nombre'),
     supabase.from('pedidos').select('ped_codigo,ped_fecha,epe_codigo').order('ped_fecha', { ascending: false }).limit(50),
     supabase.from('citas').select('cit_codigo,cit_inicio,eci_codigo').order('cit_inicio', { ascending: false }).limit(50),
-    supabase.from('vista_stock_actual').select('pro_codigo,stock_actual,inv_stock_minimo')
+    supabase.from('inventario').select('inv_id,pro_codigo,inv_stock_actual,inv_stock_minimo'),
   ]);
   const error = results.find(result => result.error)?.error; if (error) throw error;
-  const [products, orders, appointments, stock] = results.map(result => result.data || []);
-  $('productCount').textContent = products.length; $('orderCount').textContent = orders.length; $('appointmentCount').textContent = appointments.length; $('lowStockCount').textContent = stock.filter(x => Number(x.stock_actual) <= Number(x.inv_stock_minimo)).length;
-  rows('productsBody', products.map(p => `<tr><td>${esc(p.pro_sku)}</td><td>${esc(p.pro_nombre)}</td><td>$${Number(p.pro_precio).toFixed(2)}</td><td>${p.pro_activo ? 'Sí' : 'No'}</td></tr>`).join(''));
+  const [products, orders, appointments, inventory] = results.map(result => result.data || []);
+  const stockByProduct = new Map(inventory.map(item => [item.pro_codigo, item]));
+  $('productCount').textContent = products.filter(p => p.pro_activo).length; $('orderCount').textContent = orders.length; $('appointmentCount').textContent = appointments.length; $('lowStockCount').textContent = inventory.filter(x => Number(x.inv_stock_actual) <= Number(x.inv_stock_minimo)).length;
+  rows('inventoryBody', products.map(p => { const item = stockByProduct.get(p.pro_codigo); const qty = Number(item?.inv_stock_actual ?? 0); const min = Number(item?.inv_stock_minimo ?? 0); const state = qty <= 0 ? ['Agotado','stock-out'] : qty <= min ? ['Stock bajo','stock-low'] : ['Disponible','stock-ok']; return `<tr><td>${esc(p.pro_sku)}</td><td>${esc(p.pro_nombre)}</td><td>$${Number(p.pro_precio).toFixed(2)}</td><td>${qty}</td><td>${min}</td><td class="${state[1]}">${state[0]}</td><td>${item ? `<input type="number" min="0" value="${qty}" data-stock-id="${item.inv_id}" data-stock-min="${min}" style="width:90px"><button class="btn btn--outline" data-save-stock="${item.inv_id}">Guardar</button>` : '<span class="muted">Sin registro</span>'}</td></tr>`; }).join(''), 7);
   rows('ordersBody', orders.map(p => `<tr><td>${esc(p.ped_codigo)}</td><td>${new Date(p.ped_fecha).toLocaleString('es-EC')}</td><td>${esc(p.epe_codigo)}</td></tr>`).join(''), 3);
   rows('appointmentsBody', appointments.map(c => `<tr><td>${esc(c.cit_codigo)}</td><td>${new Date(c.cit_inicio).toLocaleString('es-EC')}</td><td>${esc(c.eci_codigo)}</td></tr>`).join(''), 3);
+  document.querySelectorAll('[data-save-stock]').forEach(button => button.addEventListener('click', () => updateStock(button.dataset.saveStock)));
 }
+async function updateStock(id) { const input = document.querySelector(`[data-stock-id="${id}"]`); const minInput = input?.dataset.stockMin; const { error } = await supabase.from('inventario').update({ inv_stock_actual: Number(input.value), inv_stock_minimo: Number(minInput) }).eq('inv_id', id); $('inventoryMessage').textContent = error ? error.message : 'Inventario actualizado correctamente.'; if (!error) await loadDashboard(); }
 async function showAdmin() { $('loginPanel').classList.add('hidden'); $('adminPanel').classList.remove('hidden'); await loadDashboard(); }
 async function start() { if (!isSupabaseConfigured) return message('Configura la publishable key de Supabase en js/supabase.js.'); try { if (await adminProfile()) await showAdmin(); } catch (e) { message(e.message); } }
 $('loginForm').addEventListener('submit', async event => { event.preventDefault(); message('Iniciando sesión...'); try { const { error } = await supabase.auth.signInWithPassword({ email: $('email').value.trim(), password: $('password').value }); if (error) throw error; if (!(await adminProfile())) { await supabase.auth.signOut(); throw new Error('Esta cuenta no tiene rol de administrador.'); } await showAdmin(); } catch (e) { message(e.message); } });
 $('logoutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); $('adminPanel').classList.add('hidden'); $('loginPanel').classList.remove('hidden'); });
 $('refreshBtn').addEventListener('click', () => loadDashboard().catch(e => message(e.message)));
-$('productForm').addEventListener('submit', async event => { event.preventDefault(); const { error } = await supabase.from('productos').insert({ pro_codigo: `PRO-${crypto.randomUUID()}`, pro_sku: $('productSku').value.trim(), pro_nombre: $('productName').value.trim(), pro_precio: Number($('productPrice').value), pro_activo: true, pro_vendible: true }); $('productMessage').textContent = error ? error.message : 'Producto creado correctamente.'; if (!error) { event.target.reset(); await loadDashboard(); } });
+$('productForm').addEventListener('submit', async event => { event.preventDefault(); const code = `PRO-${crypto.randomUUID()}`; const { error } = await supabase.from('productos').insert({ pro_codigo: code, pro_sku: $('productSku').value.trim(), pro_nombre: $('productName').value.trim(), pro_precio: Number($('productPrice').value), pro_activo: true, pro_vendible: true }); if (error) { $('productMessage').textContent = error.message; return; } const { error: stockError } = await supabase.from('inventario').insert({ pro_codigo: code, inv_stock_actual: Number($('productStock').value), inv_stock_minimo: Number($('productMinStock').value) }); $('productMessage').textContent = stockError ? stockError.message : 'Producto e inventario creados correctamente.'; if (!stockError) { event.target.reset(); await loadDashboard(); } });
 start();
