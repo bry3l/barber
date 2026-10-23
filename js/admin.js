@@ -14,7 +14,7 @@ async function loadDashboard(){
   supabase.from('detalles_pedidos').select('ped_codigo,pro_codigo,dpe_cantidad,dpe_precio_unitario'),
   supabase.from('citas').select('cit_codigo,cit_inicio,cit_fin,cit_precio,eci_codigo,ser_codigo,bar_codigo').order('cit_inicio',{ascending:false}).limit(100),
   supabase.from('inventario').select('inv_id,pro_codigo,inv_stock_actual,inv_stock_minimo')
- ]);const failed=results.find(r=>r.error);if(failed)throw failed.error;const [products,orders,lines,appointments,inventory]=results.map(r=>r.data||[]);
+ ]);const failed=results.find(r=>r.error);if(failed)throw failed.error;const [products,orders,lines,appointments,inventory]=results.map(r=>r.data||[]);console.log('Dashboard BLASH', {products, inventory, appointments});
  const stock=new Map(inventory.map(i=>[i.pro_codigo,i]));const sales=new Map();lines.forEach(l=>sales.set(l.pro_codigo,(sales.get(l.pro_codigo)||0)+Number(l.dpe_cantidad||0)));
  if($('productCount'))$('productCount').textContent=products.filter(p=>p.pro_activo&&p.pro_vendible).length;if($('orderCount'))$('orderCount').textContent=orders.length;if($('appointmentCount'))$('appointmentCount').textContent=appointments.length;if($('lowStockCount'))$('lowStockCount').textContent=inventory.filter(i=>Number(i.inv_stock_actual)<=Number(i.inv_stock_minimo)).length;if($('inventoryTotal'))$('inventoryTotal').textContent=inventory.reduce((s,i)=>s+Number(i.inv_stock_actual||0),0);
  const max=Math.max(...inventory.map(i=>Number(i.inv_stock_actual)),1);if($('inventoryChart'))$('inventoryChart').innerHTML=inventory.slice(0,8).map(i=>`<div style="flex:1;height:${Math.max(8,Number(i.inv_stock_actual)/max*100)}%;background:#c9a24a" title="${esc(i.pro_codigo)}"></div>`).join('');
