@@ -9,7 +9,7 @@ export const SUPABASE_PUBLISHABLE_KEY =
 export const isSupabaseConfigured = Boolean(
   SUPABASE_URL &&
   SUPABASE_PUBLISHABLE_KEY &&
-  !SUPABASE_PUBLISHABLE_KEY.startsWith('PEGA_AQUI')
+  !SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_35_2_0vyIogXOdG04K7FmA_QToir70-')
 );
 
 export const supabase = createClient(
